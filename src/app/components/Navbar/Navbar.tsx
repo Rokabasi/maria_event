@@ -26,9 +26,9 @@ export default function Navbar() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="lucide lucide-shopping-cart-icon lucide-shopping-cart"
             >
               <circle cx="8" cy="21" r="1" />
@@ -73,9 +73,10 @@ export default function Navbar() {
                   >
                     <Image
                       src="/facebook.png"
-                      alt="icon"
+                      alt="Facebook"
                       width={24}
                       height={24}
+                      style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                   <a
@@ -84,9 +85,10 @@ export default function Navbar() {
                   >
                     <Image
                       src="/instagram.png"
-                      alt="icon"
+                      alt="Instagram"
                       width={24}
                       height={24}
+                      style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                   <a
@@ -95,9 +97,10 @@ export default function Navbar() {
                   >
                     <Image
                       src="/tiktok.png"
-                      alt="icon"
+                      alt="TikTok"
                       width={24}
                       height={24}
+                      style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                   <a
@@ -106,9 +109,10 @@ export default function Navbar() {
                   >
                     <Image
                       src="/whatsapp.png"
-                      alt="icon"
+                      alt="WhatsApp"
                       width={24}
                       height={24}
+                      style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                 </div>

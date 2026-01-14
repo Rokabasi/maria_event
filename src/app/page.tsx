@@ -1,14 +1,26 @@
 
-import Banner from "./components/Banner/Banner";
 import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import Categories from "./components/Categories/Categories";
+import ProductGrid from "./components/ProductGrid/ProductGrid";
+import ExclusiveOffers from "./components/ExclusiveOffers/ExclusiveOffers";
+import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
+import YouMightLike from "./components/YouMightLike/YouMightLike";
+import Newsletter from "./components/Newsletter/Newsletter";
+import Footer from "./components/Footer/Footer";
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
-      <Banner />
-      
-      <h1 className="text-2xl font-bold">Home Page</h1>
+      <Hero />
+      <Categories />
+      <ProductGrid />
+      <ExclusiveOffers />
+      <CustomerReviews />
+      <YouMightLike />
+      <Newsletter />
+      <Footer />
     </div>
   );
 }
