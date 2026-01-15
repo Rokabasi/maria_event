@@ -1,24 +1,38 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
 import Image from "next/image";
+import { useCart } from "../../context/CartContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const { getCartCount } = useCart();
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const navigateTo = (path: string) => {
+    setIsMenuOpen(false);
+    router.push(path);
+  };
+
   return (
     <>
-      <div className="flex items-center justify-between p-4 relative z-50">
+      <div className="flex items-center justify-between p-4 relative z-50 bg-white">
         <Menu isActive={isMenuOpen} onClick={handleMenuClick} />
-        <Logo />
+        <div onClick={() => navigateTo('/')} className="cursor-pointer">
+          <Logo />
+        </div>
         <div className="relative">
-          <div className="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center">
+          <button
+            onClick={() => router.push('/cart')}
+            className="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -35,83 +49,99 @@ export default function Navbar() {
               <circle cx="19" cy="21" r="1" />
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
             </svg>
-          </div>
-          <span className="absolute bg-black text-white text-xs rounded-full w-4 h-4 -right-1 -bottom-1 flex items-center justify-center">
-            0
-          </span>
+          </button>
+          {getCartCount() > 0 && (
+            <span className="absolute bg-black text-white text-xs rounded-full w-5 h-5 -right-1 -bottom-1 flex items-center justify-center font-semibold animate-scale-in">
+              {getCartCount()}
+            </span>
+          )}
         </div>
       </div>
 
       {/* Menu mobile overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 animate-fade-in"
           onClick={handleMenuClick}
         >
           <div
-            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6"
+            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-slide-in"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              <div className="flex flex-col space-y-4 mt-20 items-center justify-center">
-                <a href="#" className="text-lg font-medium hover:text-gray-600">
+              <div className="flex flex-col space-y-6 mt-20 items-center justify-center">
+                <button
+                  onClick={() => navigateTo('/')}
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                >
                   Accueil
-                </a>
-                <a href="#" className="text-lg font-medium hover:text-gray-600">
+                </button>
+                <button
+                  onClick={() => navigateTo('/products')}
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                >
                   Produits
-                </a>
-                <a href="#" className="text-lg font-medium hover:text-gray-600">
-                  À propos
-                </a>
+                </button>
+                <button
+                  onClick={() => navigateTo('/cart')}
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform flex items-center gap-2"
+                >
+                  Panier
+                  {getCartCount() > 0 && (
+                    <span className="bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                      {getCartCount()}
+                    </span>
+                  )}
+                </button>
               </div>
-              <div className="mt-10 flex flex-col items-center justify-center">
-                <h2 className="text-lg font-semibold mb-2">Nos Réseaux</h2>
+              <div className="mt-12 flex flex-col items-center justify-center">
+                <h2 className="text-lg font-semibold mb-4">Nos Réseaux</h2>
                 <div className="flex space-x-6">
                   <a
                     href="#"
-                    className="text-lg font-medium hover:text-gray-600"
+                    className="hover:scale-110 transition-transform"
                   >
                     <Image
                       src="/facebook.png"
                       alt="Facebook"
-                      width={24}
-                      height={24}
+                      width={28}
+                      height={28}
                       style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                   <a
                     href="#"
-                    className="text-lg font-medium hover:text-gray-600"
+                    className="hover:scale-110 transition-transform"
                   >
                     <Image
                       src="/instagram.png"
                       alt="Instagram"
-                      width={24}
-                      height={24}
+                      width={28}
+                      height={28}
                       style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                   <a
                     href="#"
-                    className="text-lg font-medium hover:text-gray-600"
+                    className="hover:scale-110 transition-transform"
                   >
                     <Image
                       src="/tiktok.png"
                       alt="TikTok"
-                      width={24}
-                      height={24}
+                      width={28}
+                      height={28}
                       style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>
                   <a
                     href="#"
-                    className="text-lg font-medium hover:text-gray-600"
+                    className="hover:scale-110 transition-transform"
                   >
                     <Image
                       src="/whatsapp.png"
                       alt="WhatsApp"
-                      width={24}
-                      height={24}
+                      width={28}
+                      height={28}
                       style={{ width: 'auto', height: 'auto' }}
                     />
                   </a>

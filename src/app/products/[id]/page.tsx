@@ -1,18 +1,23 @@
 'use client';
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import Toast from "../../components/Toast/Toast";
 import { useState } from "react";
+import { useCart } from "../../context/CartContext";
 
 export default function ProductDetailPage() {
     const params = useParams();
+    const router = useRouter();
+    const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState("M");
+    const [showToast, setShowToast] = useState(false);
 
     // Simuler les données du produit
     const product = {
-        id: params.id,
+        id: params.id as string,
         title: "Sweat-shirt Premium",
         price: "45€",
         description: "Un sweat-shirt confortable et élégant, parfait pour toutes les occasions. Fabriqué avec des matériaux de haute qualité pour un confort optimal.",
@@ -27,9 +32,41 @@ export default function ProductDetailPage() {
         ]
     };
 
+    const handleAddToCart = () => {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            size: selectedSize,
+            quantity: quantity
+        });
+        // Afficher le toast
+        setShowToast(true);
+        // Réinitialiser la quantité après ajout
+        setQuantity(1);
+    };
+
+    const handleBuyNow = () => {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            size: selectedSize,
+            quantity: quantity
+        });
+        router.push('/cart');
+    };
+
     return (
         <div className="min-h-screen">
             <Navbar />
+            <Toast
+                message="Produit ajouté au panier !"
+                isVisible={showToast}
+                onClose={() => setShowToast(false)}
+            />
             <section className="py-12 px-4">
                 <div className="max-w-6xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -54,8 +91,8 @@ export default function ProductDetailPage() {
                                             key={size}
                                             onClick={() => setSelectedSize(size)}
                                             className={`px-4 py-2 border rounded-lg transition-colors ${selectedSize === size
-                                                    ? 'bg-black text-white border-black'
-                                                    : 'bg-white text-black border-gray-300 hover:border-black'
+                                                ? 'bg-black text-white border-black'
+                                                : 'bg-white text-black border-gray-300 hover:border-black'
                                                 }`}
                                         >
                                             {size}
@@ -84,10 +121,21 @@ export default function ProductDetailPage() {
                                 </div>
                             </div>
 
-                            {/* Bouton Commander */}
-                            <button className="w-full bg-black text-white py-4 rounded-lg hover:bg-gray-800 transition-colors mb-6 text-lg font-semibold">
-                                Commander maintenant
-                            </button>
+                            {/* Boutons d'action */}
+                            <div className="space-y-3 mb-6">
+                                <button
+                                    onClick={handleBuyNow}
+                                    className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-colors border-2 border-black"
+                                >
+                                    Commander maintenant
+                                </button>
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="w-full bg-white text-black border-2 border-black py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                                >
+                                    Ajouter au panier
+                                </button>
+                            </div>
 
                             {/* Détails supplémentaires */}
                             <div className="border-t pt-6">
