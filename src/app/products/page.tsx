@@ -6,19 +6,19 @@ export default function ProductsPage() {
     const productsByCategory = {
         "Vêtements": [
             { title: "Sweat-shirt", price: "45€", image: "Sweat", isNew: true },
-            { title: "Chemise Soleil", price: "32€", image: "Shirt" },
-            { title: "Veste Oversize", price: "67€", image: "Jacket" },
-            { title: "Polo", price: "28€", image: "Polo" },
-            { title: "Veste en Jean", price: "78€", image: "Denim" },
-            { title: "T-Shirt Équipe", price: "24€", image: "T-Shirt" },
-            { title: "Veste en Jean Vintage", price: "89€", image: "Vintage" },
-            { title: "Polo Classique", price: "45€", image: "Classic" },
-            { title: "Blazer Moderne", price: "120€", image: "Blazer" },
-            { title: "Sweat à Capuche", price: "65€", image: "Hoodie" }
+            { title: "Chemise Soleil", price: "32€", image: "Shirt", isNew: false },
+            { title: "Veste Oversize", price: "67€", image: "Jacket", isNew: false },
+            { title: "Polo", price: "28€", image: "Polo", isNew: false },
+            { title: "Veste en Jean", price: "78€", image: "Denim", isNew: false },
+            { title: "T-Shirt Équipe", price: "24€", image: "T-Shirt", isNew: false },
+            { title: "Veste en Jean Vintage", price: "89€", image: "Vintage", isNew: false },
+            { title: "Polo Classique", price: "45€", image: "Classic", isNew: false },
+            { title: "Blazer Moderne", price: "120€", image: "Blazer", isNew: false },
+            { title: "Sweat à Capuche", price: "65€", image: "Hoodie", isNew: false }
         ],
         "Accessoires": [
-            { title: "Sac de Luxe", price: "89€", image: "Bag" },
-            { title: "Montre Décontractée", price: "156€", image: "Watch" }
+            { title: "Sac de Luxe", price: "89€", image: "Bag", isNew: false },
+            { title: "Montre Décontractée", price: "156€", image: "Watch", isNew: false }
         ]
     };
 
