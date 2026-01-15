@@ -6,7 +6,6 @@ import ProductGrid from "./components/ProductGrid/ProductGrid";
 import ExclusiveOffers from "./components/ExclusiveOffers/ExclusiveOffers";
 import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
 import YouMightLike from "./components/YouMightLike/YouMightLike";
-import Newsletter from "./components/Newsletter/Newsletter";
 import Footer from "./components/Footer/Footer";
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
       <ExclusiveOffers />
       <CustomerReviews />
       <YouMightLike />
-      <Newsletter />
       <Footer />
     </div>
   );

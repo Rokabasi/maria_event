@@ -1,6 +1,13 @@
+'use client';
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ProductCard from "../ProductCard/ProductCard";
 
 export default function ProductGrid() {
+    const [showAll, setShowAll] = useState(false);
+    const router = useRouter();
+
     const products = [
         { title: "Sweat-shirt", price: "45€", image: "Sweat", isNew: true },
         { title: "Chemise Soleil", price: "32€", image: "Shirt" },
@@ -12,17 +19,16 @@ export default function ProductGrid() {
         { title: "T-Shirt Équipe", price: "24€", image: "T-Shirt" }
     ];
 
+    const displayedProducts = showAll ? products : products.slice(0, 3);
+
     return (
         <section className="py-12 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-2xl font-bold">Produits populaires</h2>
-                    <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors">
-                        Voir Tout
-                    </button>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {products.map((product, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    {displayedProducts.map((product, index) => (
                         <ProductCard
                             key={index}
                             title={product.title}
@@ -32,6 +38,16 @@ export default function ProductGrid() {
                         />
                     ))}
                 </div>
+                {!showAll && (
+                    <div className="text-center mt-8">
+                        <button
+                            onClick={() => router.push('/products')}
+                            className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors"
+                        >
+                            Voir Tout
+                        </button>
+                    </div>
+                )}
             </div>
         </section>
     );
