@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
@@ -11,6 +11,17 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const { getCartCount } = useCart();
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -23,7 +34,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 relative z-50 bg-white">
+      <div className="flex items-center justify-between p-4 relative z-50 bg-white sticky top-0 shadow-sm">
         <Menu isActive={isMenuOpen} onClick={handleMenuClick} />
         <div onClick={() => navigateTo('/')} className="cursor-pointer">
           <Logo />
@@ -61,11 +72,11 @@ export default function Navbar() {
       {/* Menu mobile overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 animate-fade-in"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 animate-fade-in overflow-hidden"
           onClick={handleMenuClick}
         >
           <div
-            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-slide-in"
+            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-slide-in overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
