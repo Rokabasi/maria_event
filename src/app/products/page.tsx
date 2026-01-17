@@ -25,13 +25,13 @@ export default function ProductsPage() {
     return (
         <div className="min-h-screen">
             <Navbar />
-            <section className="py-12 px-4">
+            <section className="py-8 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <h1 className="text-3xl font-bold mb-12">Tous nos produits</h1>
+                    <h1 className="text-2xl font-bold mb-8">Tous nos produits</h1>
 
                     {Object.entries(productsByCategory).map(([category, products]) => (
-                        <div key={category} className="mb-12">
-                            <h2 className="text-2xl font-bold mb-6">{category}</h2>
+                        <div key={category} className="mb-8">
+                            <h2 className="text-xl font-bold mb-4">{category}</h2>
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                                 {products.map((product, index) => (
                                     <ProductCard

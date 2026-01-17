@@ -29,11 +29,11 @@ export default function CartPage() {
                 <Navbar />
                 <section className="py-12 px-4">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-3xl font-bold mb-6">Votre panier</h1>
-                        <p className="text-gray-600 mb-8">Votre panier est vide</p>
+                        <h1 className="text-2xl font-bold mb-4">Votre panier</h1>
+                        <p className="text-gray-600 text-sm mb-6">Votre panier est vide</p>
                         <button
                             onClick={() => router.push('/products')}
-                            className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors"
+                            className="bg-black text-white px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors text-sm"
                         >
                             Continuer vos achats
                         </button>

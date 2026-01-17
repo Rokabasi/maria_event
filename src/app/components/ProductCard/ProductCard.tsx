@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../context/CartContext";
 import { useState } from "react";
@@ -44,8 +43,8 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                 onClick={() => router.push(`/products/${encodeURIComponent(title)}`)}
             >
                 <div className="relative">
-                    <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-                        <span className="text-gray-500">{image}</span>
+                    <div className="w-full h-40 bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-500 text-sm">{image}</span>
                     </div>
                     {isNew && (
                         <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
@@ -53,14 +52,14 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                         </span>
                     )}
                 </div>
-                <div className="p-4">
-                    <h3 className="font-semibold text-gray-800 mb-2">{title}</h3>
-                    <p className="text-lg font-bold text-gray-900 mb-3">{price}</p>
+                <div className="p-3">
+                    <h3 className="font-semibold text-gray-800 mb-1 text-sm">{title}</h3>
+                    <p className="text-base font-bold text-gray-900 mb-2">{price}</p>
                 </div>
             </div>
-            <div className="px-4 pb-4">
+            <div className="px-3 pb-3">
                 {showOptions && (
-                    <div className="mb-3 animate-slide-down">
+                    <div className="mb-2 animate-slide-down">
                         <div className="flex gap-1 justify-center mb-2">
                             {sizes.map((size) => (
                                 <button
@@ -70,8 +69,8 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                                         setSelectedSize(size);
                                     }}
                                     className={`px-2 py-1 text-xs border rounded transition-colors ${selectedSize === size
-                                            ? 'bg-black text-white border-black'
-                                            : 'bg-white text-black border-gray-300 hover:border-black'
+                                        ? 'bg-black text-white border-black'
+                                        : 'bg-white text-black border-gray-300 hover:border-black'
                                         }`}
                                 >
                                     {size}
@@ -82,7 +81,7 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                 )}
                 <button
                     onClick={handleAddToCart}
-                    className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-colors"
+                    className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm"
                 >
                     {showOptions ? 'Confirmer' : 'Ajouter au panier'}
                 </button>

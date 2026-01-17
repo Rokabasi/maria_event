@@ -1,57 +1,45 @@
 'use client';
 
 import { useParams, useRouter } from "next/navigation";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
-import Toast from "../../components/Toast/Toast";
 import { useState } from "react";
 import { useCart } from "../../context/CartContext";
+import Navbar from "../../components/Navbar/Navbar";
 
 export default function ProductDetailPage() {
     const params = useParams();
     const router = useRouter();
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
-    const [selectedSize, setSelectedSize] = useState("M");
-    const [showToast, setShowToast] = useState(false);
+    const [selectedSize, setSelectedSize] = useState("XL");
 
-    // Simuler les données du produit
     const product = {
         id: params.id as string,
-        title: "Sweat-shirt Premium",
-        price: "45€",
-        description: "Un sweat-shirt confortable et élégant, parfait pour toutes les occasions. Fabriqué avec des matériaux de haute qualité pour un confort optimal.",
-        image: "Sweat",
-        sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-        colors: ["Noir", "Blanc", "Gris", "Bleu"],
-        details: [
-            "100% Coton biologique",
-            "Coupe régulière",
-            "Lavable en machine",
-            "Fabriqué en France"
-        ]
+        title: "Sweat à capuche noir confort homme",
+        price: "160.00",
+        brand: "H&M",
+        rating: 4.9,
+        reviews: 236,
+        description: "Restez confortable et élégant avec ce sweat à capuche noir. Fabriqué à partir d'un mélange de coton doux de qualité supérieure, il offre une coupe décontractée, des poignets côtelés et une capuche chaude parfaite pour un usage quotidien.",
+        image: "Hoodie",
+        sizes: ["S", "M", "L", "XL", "XXL"]
     };
 
     const handleAddToCart = () => {
         addToCart({
             id: product.id,
             title: product.title,
-            price: product.price,
+            price: `${product.price}€`,
             image: product.image,
             size: selectedSize,
             quantity: quantity
         });
-        // Afficher le toast
-        setShowToast(true);
-        // Réinitialiser la quantité après ajout
-        setQuantity(1);
     };
 
     const handleBuyNow = () => {
         addToCart({
             id: product.id,
             title: product.title,
-            price: product.price,
+            price: `${product.price}€`,
             image: product.image,
             size: selectedSize,
             quantity: quantity
@@ -60,100 +48,118 @@ export default function ProductDetailPage() {
     };
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-gray-50">
+            {/* Navbar */}
             <Navbar />
-            <Toast
-                message="Produit ajouté au panier !"
-                isVisible={showToast}
-                onClose={() => setShowToast(false)}
-            />
-            <section className="py-12 px-4">
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Image du produit */}
-                        <div className="bg-gray-200 rounded-lg h-96 md:h-[500px] flex items-center justify-center">
-                            <span className="text-gray-500 text-2xl">{product.image}</span>
-                        </div>
 
-                        {/* Détails du produit */}
-                        <div>
-                            <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-                            <p className="text-2xl font-bold text-gray-900 mb-6">{product.price}</p>
-
-                            <p className="text-gray-600 mb-6">{product.description}</p>
-
-                            {/* Sélection de la taille */}
-                            <div className="mb-6">
-                                <label className="block font-semibold mb-2">Taille</label>
-                                <div className="flex gap-2 flex-wrap">
-                                    {product.sizes.map((size) => (
-                                        <button
-                                            key={size}
-                                            onClick={() => setSelectedSize(size)}
-                                            className={`px-4 py-2 border rounded-lg transition-colors ${selectedSize === size
-                                                ? 'bg-black text-white border-black'
-                                                : 'bg-white text-black border-gray-300 hover:border-black'
-                                                }`}
-                                        >
-                                            {size}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Quantité */}
-                            <div className="mb-6">
-                                <label className="block font-semibold mb-2">Quantité</label>
-                                <div className="flex items-center gap-4">
-                                    <button
-                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="w-10 h-10 border border-gray-300 rounded-lg hover:bg-gray-100"
-                                    >
-                                        -
-                                    </button>
-                                    <span className="text-lg font-semibold">{quantity}</span>
-                                    <button
-                                        onClick={() => setQuantity(quantity + 1)}
-                                        className="w-10 h-10 border border-gray-300 rounded-lg hover:bg-gray-100"
-                                    >
-                                        +
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Boutons d'action */}
-                            <div className="space-y-3 mb-6">
-                                <button
-                                    onClick={handleBuyNow}
-                                    className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-colors border-2 border-black"
-                                >
-                                    Commander maintenant
-                                </button>
-                                <button
-                                    onClick={handleAddToCart}
-                                    className="w-full bg-white text-black border-2 border-black py-2 rounded-lg hover:bg-gray-50 transition-colors"
-                                >
-                                    Ajouter au panier
-                                </button>
-                            </div>
-
-                            {/* Détails supplémentaires */}
-                            <div className="border-t pt-6">
-                                <h3 className="font-semibold mb-3">Détails du produit</h3>
-                                <ul className="space-y-2">
-                                    {product.details.map((detail, index) => (
-                                        <li key={index} className="text-gray-600 flex items-start">
-                                            <span className="mr-2">•</span>
-                                            {detail}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
+            {/* Image du produit */}
+            <div className="bg-white px-4 py-6">
+                <div className="max-w-md mx-auto">
+                    <div className="aspect-square bg-gray-100 rounded-2xl flex items-center justify-center mb-3">
+                        <span className="text-gray-400 text-xl">{product.image}</span>
+                    </div>
+                    {/* Indicateurs de pagination */}
+                    <div className="flex justify-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+                        <div className="w-2 h-2 rounded-full bg-black"></div>
+                        <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+                        <div className="w-2 h-2 rounded-full bg-gray-300"></div>
                     </div>
                 </div>
-            </section>
-            <Footer />
+            </div>
+
+            {/* Détails du produit */}
+            <div className="bg-white mt-2 px-4 py-5">
+                <div className="max-w-md mx-auto">
+                    {/* Marque et note */}
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                            <span className="text-gray-500 text-xs">{product.brand}</span>
+                            <div className="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#000000" stroke="#000000">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                </svg>
+                                <span className="text-xs font-semibold">{product.rating}</span>
+                                <span className="text-gray-400 text-xs">({product.reviews})</span>
+                            </div>
+                        </div>
+                        <button className="p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Titre et prix */}
+                    <h2 className="text-xl font-bold mb-2">{product.title}</h2>
+                    <p className="text-xl font-bold text-gray-900 mb-3">${product.price}</p>
+
+                    {/* Description */}
+                    <p className="text-gray-500 text-xs leading-relaxed mb-5">{product.description}</p>
+
+                    {/* Sélection de la taille */}
+                    <div className="mb-5">
+                        <div className="flex items-center justify-between mb-3">
+                            <span className="font-bold text-base">Taille: <span className="font-normal">{selectedSize}</span></span>
+                        </div>
+                        <div className="flex gap-2">
+                            {product.sizes.map((size) => (
+                                <button
+                                    key={size}
+                                    onClick={() => setSelectedSize(size)}
+                                    className={`w-12 h-12 rounded-full font-semibold text-sm transition-all ${selectedSize === size
+                                        ? 'bg-black text-white'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                        }`}
+                                >
+                                    {size}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Quantité */}
+                    <div className="mb-5">
+                        <span className="font-bold text-base block mb-3">Quantité</span>
+                        <div className="flex items-center gap-3">
+                            <button
+                                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                            </button>
+                            <span className="text-lg font-semibold w-8 text-center">{quantity}</span>
+                            <button
+                                onClick={() => setQuantity(quantity + 1)}
+                                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Boutons d'action */}
+                    <div className="flex gap-2.5">
+                        <button
+                            onClick={handleAddToCart}
+                            className="flex-1 bg-white text-black py-2 rounded-full hover:bg-gray-100 transition-colors font-medium border border-gray-200 text-sm"
+                        >
+                            Ajouter au panier
+                        </button>
+                        <button
+                            onClick={handleBuyNow}
+                            className="flex-1 bg-black text-white py-2 rounded-full hover:bg-gray-800 transition-colors font-medium text-sm"
+                        >
+                            Acheter maintenant
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
