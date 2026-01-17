@@ -58,8 +58,16 @@ export default function CartPage() {
                     <div className="space-y-3 mb-4">
                         {cart.map((item) => (
                             <div key={`${item.id}-${item.size}`} className="bg-white rounded-2xl p-3 flex items-start gap-3 relative">
-                                <div className="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <span className="text-gray-400 text-xs">{item.image}</span>
+                                <div className="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
+                                    <img
+                                        src={item.image.startsWith('http') ? item.image : `https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200&h=200&fit=crop`}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            e.currentTarget.style.display = 'none';
+                                            e.currentTarget.parentElement!.innerHTML = `<span class="text-gray-400 text-xs">${item.image}</span>`;
+                                        }}
+                                    />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <h3 className="font-bold text-sm mb-0.5 truncate">{item.title}</h3>

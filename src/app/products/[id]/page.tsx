@@ -20,7 +20,7 @@ export default function ProductDetailPage() {
         rating: 4.9,
         reviews: 236,
         description: "Restez confortable et élégant avec ce sweat à capuche noir. Fabriqué à partir d'un mélange de coton doux de qualité supérieure, il offre une coupe décontractée, des poignets côtelés et une capuche chaude parfaite pour un usage quotidien.",
-        image: "Hoodie",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
         sizes: ["S", "M", "L", "XL", "XXL"]
     };
 
@@ -55,8 +55,12 @@ export default function ProductDetailPage() {
             {/* Image du produit */}
             <div className="bg-white px-4 py-6">
                 <div className="max-w-md mx-auto">
-                    <div className="aspect-square bg-gray-100 rounded-2xl flex items-center justify-center mb-3">
-                        <span className="text-gray-400 text-xl">{product.image}</span>
+                    <div className="aspect-square bg-gray-100 rounded-2xl flex items-center justify-center mb-3 overflow-hidden">
+                        <img
+                            src={product.image}
+                            alt={product.title}
+                            className="w-full h-full object-cover"
+                        />
                     </div>
                     {/* Indicateurs de pagination */}
                     <div className="flex justify-center gap-2">

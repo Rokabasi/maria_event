@@ -43,8 +43,16 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                 onClick={() => router.push(`/products/${encodeURIComponent(title)}`)}
             >
                 <div className="relative">
-                    <div className="w-full h-40 bg-gray-200 flex items-center justify-center">
-                        <span className="text-gray-500 text-sm">{image}</span>
+                    <div className="w-full h-40 bg-gray-200 flex items-center justify-center overflow-hidden">
+                        <img
+                            src={image}
+                            alt={title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement!.innerHTML = `<span class="text-gray-500 text-sm">${title}</span>`;
+                            }}
+                        />
                     </div>
                     {isNew && (
                         <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
