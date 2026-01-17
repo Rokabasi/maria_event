@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams, useRouter } from "next/navigation";
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useCart } from "../../context/CartContext";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -185,7 +185,6 @@ export default function ProductDetailPage() {
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState("M");
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const sliderRef = useRef<HTMLDivElement>(null);
 
     const productId = decodeURIComponent(params.id as string);
 
@@ -215,16 +214,6 @@ export default function ProductDetailPage() {
         return () => clearInterval(interval);
     }, [product.images.length]);
 
-    // Scroll to current image
-    useEffect(() => {
-        if (sliderRef.current) {
-            sliderRef.current.scrollTo({
-                left: sliderRef.current.offsetWidth * currentImageIndex,
-                behavior: 'smooth'
-            });
-        }
-    }, [currentImageIndex]);
-
     const handleAddToCart = () => {
         addToCart({
             id: product.id,
@@ -237,32 +226,23 @@ export default function ProductDetailPage() {
     };
 
     const handleBuyNow = () => {
-        addToCart({
-            id: product.id,
-            title: product.title,
-            price: `${product.price}€`,
-            image: product.images[0],
-            size: selectedSize,
-            quantity: quantity
-        });
-        router.push('/cart');
+        router.push('/products');
     };
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Navbar */}
             <Navbar />
 
             {/* Image slider du produit */}
             <div className="bg-white px-4 py-6">
                 <div className="max-w-md mx-auto">
-                    <div
-                        ref={sliderRef}
-                        className="aspect-square bg-gray-100 rounded-2xl mb-3 overflow-hidden relative"
-                    >
-                        <div className="flex snap-x snap-mandatory overflow-x-auto scrollbar-hide">
+                    <div className="relative aspect-square bg-gray-100 rounded-2xl mb-3 overflow-hidden">
+                        <div
+                            className="flex transition-transform duration-300 ease-in-out h-full"
+                            style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+                        >
                             {product.images.map((image, index) => (
-                                <div key={index} className="min-w-full snap-center">
+                                <div key={index} className="min-w-full h-full flex-shrink-0">
                                     <img
                                         src={image}
                                         alt={`${product.title} - Image ${index + 1}`}
