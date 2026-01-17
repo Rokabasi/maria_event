@@ -1,10 +1,12 @@
 export default function Footer() {
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="bg-gray-100 py-12 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <h3 className="font-bold text-lg mb-4">SHOP.CO</h3>
+                        <h3 className="font-bold text-lg mb-4">MARIA EVENT</h3>
                         <p className="text-gray-600 text-sm">
                             Nous avons des vêtements qui correspondent à votre style et que vous êtes fier de porter.
                         </p>
@@ -42,7 +44,7 @@ export default function Footer() {
                 </div>
 
                 <div className="border-t border-gray-300 mt-8 pt-8 text-center text-sm text-gray-600">
-                    <p>&copy; 2024 Shop.co, Tous droits réservés.</p>
+                    <p>&copy; {currentYear} Maria Event, Tous droits réservés.</p>
                 </div>
             </div>
         </footer>
