@@ -2,8 +2,8 @@ import CategoryCard from "../CategoryCard/CategoryCard";
 
 export default function Categories() {
     const categories = [
-        { title: "Tendance urbaine", subtitle: "pour 2024", image: "urban" },
-        { title: "Style professionnel", subtitle: "pour tous", image: "work" }
+        { title: "Tendance urbaine", subtitle: "pour 2024", image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&h=400&fit=crop" },
+        { title: "Style professionnel", subtitle: "pour tous", image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=400&fit=crop" }
     ];
 
     return (
