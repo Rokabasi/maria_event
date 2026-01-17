@@ -1,28 +1,160 @@
 'use client';
 
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useCart } from "../../context/CartContext";
 import Navbar from "../../components/Navbar/Navbar";
+
+// Base de données des produits
+const productsDatabase = {
+    "Sweat-shirt": {
+        title: "Sweat-shirt",
+        price: "45.00",
+        brand: "H&M",
+        rating: 4.9,
+        reviews: 236,
+        description: "Sweat-shirt confortable et élégant, parfait pour un look décontracté. Fabriqué en coton doux de qualité supérieure.",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "Chemise Soleil": {
+        title: "Chemise Soleil",
+        price: "32.00",
+        brand: "Zara",
+        rating: 4.5,
+        reviews: 128,
+        description: "Chemise légère et respirante, idéale pour les journées ensoleillées. Coupe moderne et confortable.",
+        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL"]
+    },
+    "Veste Oversize": {
+        title: "Veste Oversize",
+        price: "67.00",
+        brand: "Pull&Bear",
+        rating: 4.7,
+        reviews: 89,
+        description: "Veste oversize tendance avec une coupe ample et décontractée. Parfaite pour un style urbain.",
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "Polo": {
+        title: "Polo",
+        price: "28.00",
+        brand: "Lacoste",
+        rating: 4.6,
+        reviews: 156,
+        description: "Polo classique en coton piqué. Un incontournable pour un look élégant et décontracté.",
+        image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "Veste en Jean": {
+        title: "Veste en Jean",
+        price: "78.00",
+        brand: "Levi's",
+        rating: 4.8,
+        reviews: 203,
+        description: "Veste en jean classique et intemporelle. Durable et stylée pour toutes les saisons.",
+        image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "T-Shirt Équipe": {
+        title: "T-Shirt Équipe",
+        price: "24.00",
+        brand: "Nike",
+        rating: 4.4,
+        reviews: 312,
+        description: "T-shirt sportif en tissu respirant. Confort optimal pour vos activités quotidiennes.",
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "Sac de Luxe": {
+        title: "Sac de Luxe",
+        price: "89.00",
+        brand: "Michael Kors",
+        rating: 4.9,
+        reviews: 167,
+        description: "Sac élégant en cuir synthétique de haute qualité. Design sophistiqué et pratique.",
+        image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=600&fit=crop",
+        sizes: ["Unique"]
+    },
+    "Montre Décontractée": {
+        title: "Montre Décontractée",
+        price: "156.00",
+        brand: "Fossil",
+        rating: 4.7,
+        reviews: 94,
+        description: "Montre moderne avec bracelet en cuir. Élégance et précision pour votre quotidien.",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
+        sizes: ["Unique"]
+    },
+    "Veste en Jean Vintage": {
+        title: "Veste en Jean Vintage",
+        price: "89.00",
+        brand: "Vintage Store",
+        rating: 4.6,
+        reviews: 78,
+        description: "Veste en jean vintage avec un style rétro unique. Pièce authentique et tendance.",
+        image: "https://images.unsplash.com/photo-1543076659-9380cdf10613?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL"]
+    },
+    "Polo Classique": {
+        title: "Polo Classique",
+        price: "45.00",
+        brand: "Ralph Lauren",
+        rating: 4.8,
+        reviews: 201,
+        description: "Polo classique en coton premium. Élégance intemporelle et confort absolu.",
+        image: "https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "Blazer Moderne": {
+        title: "Blazer Moderne",
+        price: "120.00",
+        brand: "Hugo Boss",
+        rating: 4.9,
+        reviews: 145,
+        description: "Blazer moderne avec une coupe ajustée. Parfait pour un look professionnel et élégant.",
+        image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    },
+    "Sweat à Capuche": {
+        title: "Sweat à Capuche",
+        price: "65.00",
+        brand: "Adidas",
+        rating: 4.7,
+        reviews: 189,
+        description: "Sweat à capuche confortable avec poche kangourou. Idéal pour un style sportif et décontracté.",
+        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
+        sizes: ["S", "M", "L", "XL", "XXL"]
+    }
+};
 
 export default function ProductDetailPage() {
     const params = useParams();
     const router = useRouter();
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
-    const [selectedSize, setSelectedSize] = useState("XL");
+    const [selectedSize, setSelectedSize] = useState("M");
 
-    const product = {
-        id: params.id as string,
-        title: "Sweat à capuche noir confort homme",
-        price: "160.00",
-        brand: "H&M",
-        rating: 4.9,
-        reviews: 236,
-        description: "Restez confortable et élégant avec ce sweat à capuche noir. Fabriqué à partir d'un mélange de coton doux de qualité supérieure, il offre une coupe décontractée, des poignets côtelés et une capuche chaude parfaite pour un usage quotidien.",
-        image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
-        sizes: ["S", "M", "L", "XL", "XXL"]
-    };
+    const productId = decodeURIComponent(params.id as string);
+
+    const product = useMemo(() => {
+        const foundProduct = productsDatabase[productId as keyof typeof productsDatabase];
+        if (!foundProduct) {
+            return {
+                id: productId,
+                title: productId,
+                price: "0.00",
+                brand: "Maria Event",
+                rating: 4.5,
+                reviews: 0,
+                description: "Produit non trouvé",
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
+                sizes: ["S", "M", "L", "XL"]
+            };
+        }
+        return { id: productId, ...foundProduct };
+    }, [productId]);
 
     const handleAddToCart = () => {
         addToCart({
