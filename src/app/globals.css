@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Cursor pointer pour tous les boutons */
+button {
+  cursor: pointer;
+}
+
 /* Masquer la scrollbar pour le slider mobile */
 .scrollbar-hide {
   -ms-overflow-style: none;
