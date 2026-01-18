@@ -1,29 +1,28 @@
 'use client';
 
 import { useRouter } from "next/navigation";
+import BannerSlider from "../BannerSlider/BannerSlider";
 
 export default function Hero() {
     const router = useRouter();
 
     return (
         <div className="relative h-screen flex items-center justify-center text-white overflow-hidden">
-            {/* Background image */}
-            <img
-                src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=1200&h=800&fit=crop&q=80"
-                alt="Sneakers Banner"
-                className="absolute inset-0 w-full h-full object-cover"
-            />
+            {/* Background slider */}
+            <div className="absolute inset-0 w-full h-full">
+                <BannerSlider />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50"></div>
 
             {/* Contenu texte */}
             <div className="relative z-20 text-center px-4">
-                <p className="text-sm uppercase tracking-wider mb-2 drop-shadow-lg">Collection</p>
+                <p className="text-sm uppercase tracking-wider mb-2 drop-shadow-lg">Maria Event</p>
                 <h1 className="text-5xl md:text-7xl font-bold mb-4 drop-shadow-2xl">
-                    Nouvelle Saison
+                    Style & Événements
                 </h1>
-                <p className="text-lg mb-2 drop-shadow-lg">2024</p>
+                <p className="text-lg mb-2 drop-shadow-lg">Baskets & Dragées</p>
                 <p className="text-base mb-8 drop-shadow-md max-w-2xl mx-auto">
-                    Découvrez notre collection exclusive de vêtements tendance
+                    Découvrez nos baskets premium et dragées artisanales pour tous vos besoins
                 </p>
                 <button
                     onClick={() => router.push('/products')}

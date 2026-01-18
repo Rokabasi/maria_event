@@ -40,7 +40,10 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
-                                e.currentTarget.parentElement!.innerHTML = `<span class="text-gray-500 text-sm">${title}</span>`;
+                                const parent = e.currentTarget.parentElement;
+                                if (parent) {
+                                    parent.innerHTML = `<span class="text-gray-500 text-sm">${title}</span>`;
+                                }
                             }}
                         />
                     </div>
@@ -62,19 +65,19 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                 </div>
                 <div className="p-4">
                     <h3 className="font-bold text-gray-900 mb-1 text-sm truncate">{title}</h3>
-                    <p className="text-lg font-bold text-black mb-3">{price}</p>
+                    <div className="flex items-center justify-between sm:block">
+                        <p className="text-lg font-bold text-black sm:mb-3">{price}</p>
+                        <button
+                            onClick={handleAddToCart}
+                            className="sm:w-full bg-black text-white py-2 px-5 sm:px-0 sm:py-2.5 rounded-full hover:bg-gray-800 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span className="hidden sm:inline">Ajouter au panier</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div className="px-4 pb-4">
-                <button
-                    onClick={handleAddToCart}
-                    className="w-full bg-black text-white py-2.5 rounded-full hover:bg-gray-800 transition-colors text-sm font-medium flex items-center justify-center gap-2"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Ajouter au panier
-                </button>
             </div>
         </div>
     );

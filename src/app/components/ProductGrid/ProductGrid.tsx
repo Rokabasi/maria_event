@@ -27,7 +27,7 @@ export default function ProductGrid() {
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-base font-bold">Produits populaires</h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                     {displayedProducts.map((product, index) => (
                         <ProductCard
                             key={index}
