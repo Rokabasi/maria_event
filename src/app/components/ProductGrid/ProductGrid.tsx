@@ -9,14 +9,14 @@ export default function ProductGrid() {
     const router = useRouter();
 
     const products = [
-        { title: "Sweat-shirt", price: "45€", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop", isNew: true },
-        { title: "Chemise Soleil", price: "32€", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop" },
-        { title: "Sac de Luxe", price: "89€", image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop" },
-        { title: "Veste Oversize", price: "67€", image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop" },
-        { title: "Polo", price: "28€", image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop" },
-        { title: "Montre Décontractée", price: "156€", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop" },
-        { title: "Veste en Jean", price: "78€", image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=400&fit=crop" },
-        { title: "T-Shirt Équipe", price: "24€", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop" }
+        { title: "Nike Air Max", price: "120€", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", isNew: true },
+        { title: "Adidas Ultraboost", price: "150€", image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop" },
+        { title: "Dragées Amande Rose", price: "12€", image: "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=400&h=400&fit=crop" },
+        { title: "Jordan Retro", price: "180€", image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&h=400&fit=crop" },
+        { title: "Dragées Chocolat Assortis", price: "15€", image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=400&fit=crop" },
+        { title: "Puma RS-X", price: "95€", image: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=400&fit=crop" },
+        { title: "Converse Chuck Taylor", price: "65€", image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=400&h=400&fit=crop" },
+        { title: "Dragées Praline", price: "18€", image: "https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?w=400&h=400&fit=crop" }
     ];
 
     const displayedProducts = showAll ? products : products.slice(0, 3);
@@ -25,7 +25,7 @@ export default function ProductGrid() {
         <section className="py-12 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-bold">Produits populaires</h2>
+                    <h2 className="text-base font-bold">Produits populaires</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     {displayedProducts.map((product, index) => (

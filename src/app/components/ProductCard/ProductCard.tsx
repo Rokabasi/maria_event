@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useCart } from "../../context/CartContext";
-import { useState } from "react";
 
 interface ProductCardProps {
     title: string;
@@ -14,40 +13,31 @@ interface ProductCardProps {
 export default function ProductCard({ title, price, image, isNew }: ProductCardProps) {
     const router = useRouter();
     const { addToCart } = useCart();
-    const [showOptions, setShowOptions] = useState(false);
-    const [selectedSize, setSelectedSize] = useState("M");
-
-    const sizes = ["XS", "S", "M", "L", "XL"];
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
-        if (!showOptions) {
-            setShowOptions(true);
-        } else {
-            addToCart({
-                id: encodeURIComponent(title),
-                title,
-                price,
-                image,
-                size: selectedSize,
-                quantity: 1
-            });
-            setShowOptions(false);
-        }
+        addToCart({
+            id: encodeURIComponent(title),
+            title,
+            price,
+            image,
+            size: "M",
+            quantity: 1
+        });
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+        <div className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div
                 className="cursor-pointer"
                 onClick={() => router.push(`/products/${encodeURIComponent(title)}`)}
             >
-                <div className="relative">
-                    <div className="w-full h-40 bg-gray-200 flex items-center justify-center overflow-hidden">
+                <div className="relative overflow-hidden">
+                    <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
                         <img
                             src={image}
                             alt={title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             onError={(e) => {
                                 e.currentTarget.style.display = 'none';
                                 e.currentTarget.parentElement!.innerHTML = `<span class="text-gray-500 text-sm">${title}</span>`;
@@ -55,43 +45,35 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                         />
                     </div>
                     {isNew && (
-                        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                        <span className="absolute top-3 left-3 bg-black text-white text-xs font-semibold px-3 py-1 rounded-full">
                             Nouveau
                         </span>
                     )}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                        className="absolute top-3 right-3 w-9 h-9 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg hover:bg-gray-100"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </button>
                 </div>
-                <div className="p-3">
-                    <h3 className="font-semibold text-gray-800 mb-1 text-sm">{title}</h3>
-                    <p className="text-base font-bold text-gray-900 mb-2">{price}</p>
+                <div className="p-4">
+                    <h3 className="font-bold text-gray-900 mb-1 text-sm truncate">{title}</h3>
+                    <p className="text-lg font-bold text-black mb-3">{price}</p>
                 </div>
             </div>
-            <div className="px-3 pb-3">
-                {showOptions && (
-                    <div className="mb-2 animate-slide-down">
-                        <div className="flex gap-1 justify-center mb-2">
-                            {sizes.map((size) => (
-                                <button
-                                    key={size}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedSize(size);
-                                    }}
-                                    className={`px-2 py-1 text-xs border rounded transition-colors ${selectedSize === size
-                                        ? 'bg-black text-white border-black'
-                                        : 'bg-white text-black border-gray-300 hover:border-black'
-                                        }`}
-                                >
-                                    {size}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                )}
+            <div className="px-4 pb-4">
                 <button
                     onClick={handleAddToCart}
-                    className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm"
+                    className="w-full bg-black text-white py-2.5 rounded-full hover:bg-gray-800 transition-colors text-sm font-medium flex items-center justify-center gap-2"
                 >
-                    {showOptions ? 'Confirmer' : 'Ajouter au panier'}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    Ajouter au panier
                 </button>
             </div>
         </div>

@@ -5,10 +5,10 @@ import ProductCard from "../ProductCard/ProductCard";
 
 export default function YouMightLike() {
     const products = [
-        { title: "Veste en Jean Vintage", price: "89€", image: "https://images.unsplash.com/photo-1543076659-9380cdf10613?w=400&h=400&fit=crop" },
-        { title: "Polo Classique", price: "45€", image: "https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=400&h=400&fit=crop" },
-        { title: "Blazerreurer Moderne", price: "120€", image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop" },
-        { title: "Sweat à Capuche", price: "65€", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop" }
+        { title: "New Balance 574", price: "85€", image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop" },
+        { title: "Vans Old Skool", price: "75€", image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop" },
+        { title: "Dragées Amande Blanche", price: "12€", image: "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=400&h=400&fit=crop" },
+        { title: "Dragées Amande Bleue", price: "12€", image: "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=400&h=400&fit=crop" }
     ];
 
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -44,7 +44,7 @@ export default function YouMightLike() {
     return (
         <section className="py-12 px-4">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-2xl font-bold mb-8 text-center">Vous pourriez aussi aimer</h2>
+                <h2 className="text-base font-bold mb-8 text-center">Vous pourriez aussi aimer</h2>
 
                 {/* Slider pour mobile - une seule carte visible */}
                 <div className="md:hidden">

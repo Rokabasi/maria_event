@@ -7,174 +7,173 @@ import Navbar from "../../components/Navbar/Navbar";
 
 // Base de données des produits
 const productsDatabase = {
-    "Sweat-shirt": {
-        title: "Sweat-shirt",
-        price: "45.00",
-        brand: "H&M",
-        rating: 4.9,
-        reviews: 236,
-        description: "Sweat-shirt confortable et élégant, parfait pour un look décontracté. Fabriqué en coton doux de qualité supérieure.",
-        images: [
-            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
-    },
-    "Chemise Soleil": {
-        title: "Chemise Soleil",
-        price: "32.00",
-        brand: "Zara",
-        rating: 4.5,
-        reviews: 128,
-        description: "Chemise légère et respirante, idéale pour les journées ensoleillées. Coupe moderne et confortable.",
-        images: [
-            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL"]
-    },
-    "Veste Oversize": {
-        title: "Veste Oversize",
-        price: "67.00",
-        brand: "Pull&Bear",
-        rating: 4.7,
-        reviews: 89,
-        description: "Veste oversize tendance avec une coupe ample et décontractée. Parfaite pour un style urbain.",
-        images: [
-            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
-    },
-    "Polo": {
-        title: "Polo",
-        price: "28.00",
-        brand: "Lacoste",
-        rating: 4.6,
-        reviews: 156,
-        description: "Polo classique en coton piqué. Un incontournable pour un look élégant et décontracté.",
-        images: [
-            "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
-    },
-    "Veste en Jean": {
-        title: "Veste en Jean",
-        price: "78.00",
-        brand: "Levi's",
-        rating: 4.8,
-        reviews: 203,
-        description: "Veste en jean classique et intemporelle. Durable et stylée pour toutes les saisons.",
-        images: [
-            "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1543076659-9380cdf10613?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
-    },
-    "T-Shirt Équipe": {
-        title: "T-Shirt Équipe",
-        price: "24.00",
+    "Nike Air Max": {
+        title: "Nike Air Max",
+        price: "120.00",
         brand: "Nike",
-        rating: 4.4,
-        reviews: 312,
-        description: "T-shirt sportif en tissu respirant. Confort optimal pour vos activités quotidiennes.",
+        rating: 4.8,
+        reviews: 342,
+        description: "Baskets Nike Air Max confortables avec amorti exceptionnel. Design iconique et performance optimale pour un usage quotidien.",
         images: [
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop&sat=-100"
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop&sat=-100"
         ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
     },
-    "Sac de Luxe": {
-        title: "Sac de Luxe",
-        price: "89.00",
-        brand: "Michael Kors",
+    "Adidas Ultraboost": {
+        title: "Adidas Ultraboost",
+        price: "150.00",
+        brand: "Adidas",
+        rating: 4.9,
+        reviews: 289,
+        description: "Baskets Adidas Ultraboost avec technologie Boost pour un confort inégalé. Parfaites pour la course et le quotidien.",
+        images: [
+            "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
+    },
+    "Jordan Retro": {
+        title: "Jordan Retro",
+        price: "180.00",
+        brand: "Jordan",
+        rating: 4.9,
+        reviews: 456,
+        description: "Baskets Jordan Retro légendaires. Style iconique et qualité premium pour les passionnés de sneakers.",
+        images: [
+            "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1612902376937-4c6b5e0e3f3e?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
+    },
+    "Puma RS-X": {
+        title: "Puma RS-X",
+        price: "95.00",
+        brand: "Puma",
+        rating: 4.6,
+        reviews: 178,
+        description: "Baskets Puma RS-X au style rétro-futuriste. Confort et design audacieux pour un look unique.",
+        images: [
+            "https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
+    },
+    "New Balance 574": {
+        title: "New Balance 574",
+        price: "85.00",
+        brand: "New Balance",
+        rating: 4.7,
+        reviews: 234,
+        description: "Baskets New Balance 574 classiques et intemporelles. Confort exceptionnel et style décontracté.",
+        images: [
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
+    },
+    "Converse Chuck Taylor": {
+        title: "Converse Chuck Taylor",
+        price: "65.00",
+        brand: "Converse",
+        rating: 4.8,
+        reviews: 512,
+        description: "Baskets Converse Chuck Taylor iconiques. Style intemporel et polyvalent pour toutes les occasions.",
+        images: [
+            "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1605408499391-6368c628ef42?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
+    },
+    "Dragées Amande Rose": {
+        title: "Dragées Amande Rose",
+        price: "12.00",
+        brand: "Maria Event",
         rating: 4.9,
         reviews: 167,
-        description: "Sac élégant en cuir synthétique de haute qualité. Design sophistiqué et pratique.",
+        description: "Dragées aux amandes enrobées de chocolat rose. Parfaites pour vos événements et célébrations. Sachet de 500g.",
         images: [
-            "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=600&fit=crop&sat=-100"
+            "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=600&h=600&fit=crop&sat=-100"
         ],
-        sizes: ["Unique"]
+        sizes: ["500g", "1kg", "2kg"]
     },
-    "Montre Décontractée": {
-        title: "Montre Décontractée",
-        price: "156.00",
-        brand: "Fossil",
-        rating: 4.7,
-        reviews: 94,
-        description: "Montre moderne avec bracelet en cuir. Élégance et précision pour votre quotidien.",
-        images: [
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["Unique"]
-    },
-    "Veste en Jean Vintage": {
-        title: "Veste en Jean Vintage",
-        price: "89.00",
-        brand: "Vintage Store",
-        rating: 4.6,
-        reviews: 78,
-        description: "Veste en jean vintage avec un style rétro unique. Pièce authentique et tendance.",
-        images: [
-            "https://images.unsplash.com/photo-1543076659-9380cdf10613?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1543076659-9380cdf10613?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL"]
-    },
-    "Polo Classique": {
-        title: "Polo Classique",
-        price: "45.00",
-        brand: "Ralph Lauren",
+    "Dragées Amande Blanche": {
+        title: "Dragées Amande Blanche",
+        price: "12.00",
+        brand: "Maria Event",
         rating: 4.8,
-        reviews: 201,
-        description: "Polo classique en coton premium. Élégance intemporelle et confort absolu.",
+        reviews: 203,
+        description: "Dragées aux amandes enrobées de chocolat blanc. Élégantes et délicieuses pour tous vos événements. Sachet de 500g.",
         images: [
-            "https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=600&h=600&fit=crop&sat=-100"
+            "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&h=600&fit=crop&sat=-100"
         ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
+        sizes: ["500g", "1kg", "2kg"]
     },
-    "Blazer Moderne": {
-        title: "Blazer Moderne",
-        price: "120.00",
-        brand: "Hugo Boss",
+    "Dragées Chocolat Assortis": {
+        title: "Dragées Chocolat Assortis",
+        price: "15.00",
+        brand: "Maria Event",
         rating: 4.9,
-        reviews: 145,
-        description: "Blazer moderne avec une coupe ajustée. Parfait pour un look professionnel et élégant.",
-        images: [
-            "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=600&fit=crop&sat=-100"
-        ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
-    },
-    "Sweat à Capuche": {
-        title: "Sweat à Capuche",
-        price: "65.00",
-        brand: "Adidas",
-        rating: 4.7,
         reviews: 189,
-        description: "Sweat à capuche confortable avec poche kangourou. Idéal pour un style sportif et décontracté.",
+        description: "Assortiment de dragées au chocolat en plusieurs couleurs. Idéales pour décorer vos tables de fête. Sachet de 500g.",
         images: [
-            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop&sat=-100"
+            "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&h=600&fit=crop&sat=-100"
         ],
-        sizes: ["S", "M", "L", "XL", "XXL"]
+        sizes: ["500g", "1kg", "2kg"]
+    },
+    "Dragées Amande Bleue": {
+        title: "Dragées Amande Bleue",
+        price: "12.00",
+        brand: "Maria Event",
+        rating: 4.7,
+        reviews: 145,
+        description: "Dragées aux amandes enrobées de chocolat bleu. Parfaites pour les baptêmes et événements. Sachet de 500g.",
+        images: [
+            "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["500g", "1kg", "2kg"]
+    },
+    "Vans Old Skool": {
+        title: "Vans Old Skool",
+        price: "75.00",
+        brand: "Vans",
+        rating: 4.8,
+        reviews: 398,
+        description: "Baskets Vans Old Skool classiques avec bande latérale iconique. Style skate intemporel et confort durable.",
+        images: [
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["38", "39", "40", "41", "42", "43", "44"]
+    },
+    "Dragées Praline": {
+        title: "Dragées Praline",
+        price: "18.00",
+        brand: "Maria Event",
+        rating: 4.9,
+        reviews: 221,
+        description: "Dragées pralinées de qualité supérieure. Saveur intense et texture croquante pour vos événements raffinés. Sachet de 500g.",
+        images: [
+            "https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?w=600&h=600&fit=crop&sat=-100"
+        ],
+        sizes: ["500g", "1kg", "2kg"]
     }
 };
 
