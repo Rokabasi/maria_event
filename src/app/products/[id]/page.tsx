@@ -54,7 +54,18 @@ export default function ProductDetailPage() {
     };
 
     const handleBuyNow = () => {
-        router.push('/products');
+        // Ajouter le produit au panier
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: `${product.price}€`,
+            image: product.images[0],
+            size: selectedSize,
+            quantity: quantity
+        });
+
+        // Rediriger vers le panier
+        router.push('/cart');
     };
 
     return (

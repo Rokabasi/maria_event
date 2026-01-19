@@ -90,12 +90,12 @@ export default function AboutPage() {
                         </div>
 
                         <div className="mt-8 p-4 bg-gray-50 rounded-xl">
-                            <h4 className="font-bold mb-2">📱 Contact WhatsApp</h4>
+                            <h4 className="font-bold mb-2">Contact WhatsApp</h4>
                             <p className="text-sm text-gray-600 mb-2">
                                 Pour toute question ou commande personnalisée, contactez-nous directement :
                             </p>
                             <a
-                                href="https://wa.me/243819600518"
+                                href="https://wa.me/243819600518?text=*MARIA%20EVENT*%0ABonjour,%20j'aimerais%20avoir%20des%20informations%20sur%20vos%20produits."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-600 transition-colors"
