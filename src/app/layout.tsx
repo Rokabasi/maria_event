@@ -33,7 +33,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <CartProvider>
-          <div id="root">
+          <div id="root" className="page-transition">
             {children}
           </div>
         </CartProvider>

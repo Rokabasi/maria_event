@@ -27,7 +27,7 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
     };
 
     return (
-        <div className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <div className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
             <div
                 className="cursor-pointer"
                 onClick={() => router.push(`/products/${encodeURIComponent(title)}`)}
@@ -69,7 +69,7 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
                         <p className="text-lg font-bold text-black sm:mb-3">{price}</p>
                         <button
                             onClick={handleAddToCart}
-                            className="sm:w-full bg-black text-white py-2 px-5 sm:px-0 sm:py-2.5 rounded-full hover:bg-gray-800 transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                            className="sm:w-full bg-black text-white py-2 px-5 sm:px-0 sm:py-2.5 rounded-full hover:bg-gray-800 transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ProductCard from "../ProductCard/ProductCard";
+import StaggeredGrid from "../StaggeredGrid/StaggeredGrid";
 
 export default function ProductGrid() {
     const [showAll, setShowAll] = useState(false);
@@ -19,7 +20,7 @@ export default function ProductGrid() {
         { title: "Dragées Praline", price: "18€", image: "https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?w=400&h=400&fit=crop" }
     ];
 
-    const displayedProducts = showAll ? products : products.slice(0, 3);
+    const displayedProducts = showAll ? products : products.slice(0, 4);
 
     return (
         <section className="py-12 px-4">
@@ -27,7 +28,10 @@ export default function ProductGrid() {
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-base font-bold">Produits populaires</h2>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                <StaggeredGrid
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2"
+                    delay={250}
+                >
                     {displayedProducts.map((product, index) => (
                         <ProductCard
                             key={index}
@@ -37,12 +41,12 @@ export default function ProductGrid() {
                             isNew={product.isNew}
                         />
                     ))}
-                </div>
+                </StaggeredGrid>
                 {!showAll && (
                     <div className="text-center mt-8">
                         <button
                             onClick={() => router.push('/products')}
-                            className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors"
+                            className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors transform hover:scale-105 duration-200"
                         >
                             Voir Tout
                         </button>
