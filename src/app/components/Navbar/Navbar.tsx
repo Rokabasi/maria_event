@@ -76,38 +76,38 @@ export default function Navbar() {
           onClick={handleMenuClick}
         >
           <div
-            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-slide-in overflow-y-auto"
+            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-menu-slide-down overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
               <div className="flex flex-col space-y-6 mt-20 items-center justify-center">
                 <button
                   onClick={() => navigateTo('/')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-100"
                 >
                   Accueil
                 </button>
                 <button
                   onClick={() => navigateTo('/about')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-200"
                 >
                   À propos
                 </button>
                 <button
                   onClick={() => navigateTo('/products')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-300"
                 >
                   Catalogue
                 </button>
                 <button
                   onClick={() => navigateTo('/nouveautes')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-400"
                 >
                   Nouveautés
                 </button>
                 <button
                   onClick={() => navigateTo('/cart')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform flex items-center gap-2"
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform flex items-center gap-2 animate-menu-item delay-500"
                 >
                   Panier
                   {getCartCount() > 0 && (
@@ -117,7 +117,7 @@ export default function Navbar() {
                   )}
                 </button>
               </div>
-              <div className="mt-12 flex flex-col items-center justify-center">
+              <div className="mt-12 flex flex-col items-center justify-center animate-menu-item delay-600">
                 <h2 className="text-lg font-semibold mb-4">Nos Réseaux</h2>
                 <div className="flex space-x-6">
                   <a
