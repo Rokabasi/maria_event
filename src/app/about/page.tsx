@@ -91,7 +91,7 @@ export default function AboutPage() {
                             <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="h-48 overflow-hidden">
                                     <img
-                                        src="https://images.unsplash.com/photo-1587241321921-91aaaa6e3e8f?w=600&h=300&fit=crop"
+                                        src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=600&h=300&fit=crop"
                                         alt="Dragées"
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
