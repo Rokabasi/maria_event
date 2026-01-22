@@ -88,6 +88,12 @@ export default function Navbar() {
                   Accueil
                 </button>
                 <button
+                  onClick={() => navigateTo('/about')}
+                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
+                >
+                  À propos
+                </button>
+                <button
                   onClick={() => navigateTo('/products')}
                   className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
                 >
@@ -98,12 +104,6 @@ export default function Navbar() {
                   className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
                 >
                   Nouveautés
-                </button>
-                <button
-                  onClick={() => navigateTo('/about')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform"
-                >
-                  À propos
                 </button>
                 <button
                   onClick={() => navigateTo('/cart')}
