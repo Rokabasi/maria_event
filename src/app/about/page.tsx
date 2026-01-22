@@ -120,7 +120,7 @@ export default function AboutPage() {
                         <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 md:p-12 shadow-xl text-white mb-12">
                             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Comment Commander ?</h2>
 
-                            <div className="grid md:grid-cols-3 gap-8 mb-8">
+                            <div className="grid md:grid-cols-4 gap-6 mb-8">
                                 <div className="text-center relative">
                                     <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg transform hover:scale-110 transition-transform">
                                         <span className="text-black font-bold text-2xl">1</span>
@@ -139,12 +139,21 @@ export default function AboutPage() {
                                     <p className="text-sm text-gray-300">Choisissez vos tailles et quantités, puis ajoutez au panier</p>
                                 </div>
 
+                                <div className="text-center relative">
+                                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg transform hover:scale-110 transition-transform">
+                                        <span className="text-black font-bold text-2xl">3</span>
+                                    </div>
+                                    <div className="h-1 w-full bg-white/20 absolute top-10 left-1/2 hidden md:block"></div>
+                                    <h3 className="font-bold text-lg mb-2">Consultez votre panier</h3>
+                                    <p className="text-sm text-gray-300">Vérifiez vos articles et cliquez sur "Commander"</p>
+                                </div>
+
                                 <div className="text-center">
                                     <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg transform hover:scale-110 transition-transform">
                                         <span className="text-3xl">📱</span>
                                     </div>
-                                    <h3 className="font-bold text-lg mb-2">Commandez via WhatsApp</h3>
-                                    <p className="text-sm text-gray-300">Finalisez votre commande directement via WhatsApp</p>
+                                    <h3 className="font-bold text-lg mb-2">Finalisez sur WhatsApp</h3>
+                                    <p className="text-sm text-gray-300">Vous serez redirigé vers WhatsApp pour finaliser votre commande</p>
                                 </div>
                             </div>
 
