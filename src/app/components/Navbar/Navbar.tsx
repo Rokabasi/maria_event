@@ -121,7 +121,9 @@ export default function Navbar() {
                 <h2 className="text-lg font-semibold mb-4">Nos Réseaux</h2>
                 <div className="flex space-x-6">
                   <a
-                    href="#"
+                    href="https://web.facebook.com/mariaevent30"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:scale-110 transition-transform"
                   >
                     <Image
@@ -133,7 +135,9 @@ export default function Navbar() {
                     />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/maria_event_shopping"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:scale-110 transition-transform"
                   >
                     <Image
@@ -145,7 +149,9 @@ export default function Navbar() {
                     />
                   </a>
                   <a
-                    href="#"
+                    href="https://www.tiktok.com/@mariaevent30"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:scale-110 transition-transform"
                   >
                     <Image
@@ -157,7 +163,9 @@ export default function Navbar() {
                     />
                   </a>
                   <a
-                    href="#"
+                    href="https://wa.me/243970638618"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:scale-110 transition-transform"
                   >
                     <Image

@@ -21,7 +21,9 @@ export default function Footer() {
                         </p>
                         <div className="flex gap-4">
                             <a
-                                href="#"
+                                href="https://web.facebook.com/mariaevent30"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-200 transform hover:scale-110"
                             >
                                 <Image
@@ -32,7 +34,9 @@ export default function Footer() {
                                 />
                             </a>
                             <a
-                                href="#"
+                                href="https://www.instagram.com/maria_event_shopping"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-200 transform hover:scale-110"
                             >
                                 <Image
@@ -43,7 +47,9 @@ export default function Footer() {
                                 />
                             </a>
                             <a
-                                href="#"
+                                href="https://www.tiktok.com/@mariaevent30"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-200 transform hover:scale-110"
                             >
                                 <Image
@@ -54,7 +60,7 @@ export default function Footer() {
                                 />
                             </a>
                             <a
-                                href="https://wa.me/243819600518"
+                                href="https://wa.me/243970638618"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-all duration-200 transform hover:scale-110"
@@ -115,21 +121,31 @@ export default function Footer() {
                             <li className="flex items-start gap-2">
                                 <span className="text-pink-500 mt-1">•</span>
                                 <a
-                                    href="https://wa.me/243819600518"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href="mailto:Cendrion3@gmail.com"
                                     className="hover:text-white transition-colors"
                                 >
-                                    +243 819 600 518
+                                    Cendrion3@gmail.com
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-pink-500 mt-1">•</span>
-                                <span>WhatsApp disponible 24/7</span>
+                                <a
+                                    href="tel:+243970638618"
+                                    className="hover:text-white transition-colors"
+                                >
+                                    +243 970 638 618
+                                </a>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-pink-500 mt-1">•</span>
-                                <span>Événements & Style</span>
+                                <a
+                                    href="https://wa.me/243970638618"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-white transition-colors"
+                                >
+                                    WhatsApp disponible
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -152,7 +168,7 @@ export default function Footer() {
                         </button>
                         <span className="text-gray-600">•</span>
                         <a
-                            href="https://wa.me/243819600518"
+                            href="https://wa.me/243970638618"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hover:text-white transition-colors"
