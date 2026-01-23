@@ -15,6 +15,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Maria Event Shopping",
   description: "Votre boutique en ligne pour tous vos événements",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
