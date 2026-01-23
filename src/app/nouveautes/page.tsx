@@ -1,6 +1,4 @@
-import Navbar from "../components/Navbar/Navbar";
 import ProductCard from "../components/ProductCard/ProductCard";
-import Footer from "../components/Footer/Footer";
 import { nouveautesData } from "../data/nouveautes";
 import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
 import StaggeredGrid from "../components/StaggeredGrid/StaggeredGrid";
@@ -10,7 +8,6 @@ export default function NouveautesPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 page-transition">
-            <Navbar />
 
             <section className="py-12 px-4">
                 <div className="max-w-6xl mx-auto">
@@ -78,8 +75,6 @@ export default function NouveautesPage() {
                     </AnimatedSection>
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 }

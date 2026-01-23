@@ -1,9 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar/Navbar";
 import ProductCard from "../components/ProductCard/ProductCard";
-import Footer from "../components/Footer/Footer";
 import SkeletonLoader from "../components/SkeletonLoader/SkeletonLoader";
 import StaggeredGrid from "../components/StaggeredGrid/StaggeredGrid";
 import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
@@ -47,7 +45,6 @@ export default function ProductsPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 page-transition">
-            <Navbar />
 
             <section className="py-8 px-4">
                 <div className="max-w-6xl mx-auto">
@@ -152,8 +149,6 @@ export default function ProductsPage() {
                     )}
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 }

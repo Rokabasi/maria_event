@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "./context/CartContext";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +35,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <CartProvider>
+          <Navbar />
           <div id="root" className="page-transition">
             {children}
           </div>
+          <Footer />
         </CartProvider>
       </body>
     </html>

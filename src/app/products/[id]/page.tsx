@@ -3,7 +3,6 @@
 import { useParams, useRouter } from "next/navigation";
 import { useState, useMemo, useEffect } from "react";
 import { useCart } from "../../context/CartContext";
-import Navbar from "../../components/Navbar/Navbar";
 import { productsDatabase } from "../../data/products";
 
 export default function ProductDetailPage() {
@@ -70,7 +69,6 @@ export default function ProductDetailPage() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <Navbar />
 
             {/* Image slider du produit */}
             <div className="bg-white px-4 py-6">

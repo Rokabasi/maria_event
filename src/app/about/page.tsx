@@ -1,11 +1,8 @@
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
 import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
 
 export default function AboutPage() {
     return (
         <div className="min-h-screen bg-gray-50 page-transition">
-            <Navbar />
 
             {/* Hero Section avec image de fond */}
             <AnimatedSection animation="fade-up">
@@ -178,8 +175,6 @@ export default function AboutPage() {
                     </AnimatedSection>
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 }
