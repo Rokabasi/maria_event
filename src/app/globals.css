@@ -303,18 +303,20 @@ button {
 .delay-700 { animation-delay: 0.7s; }
 .delay-800 { animation-delay: 0.8s; }
 
-/* Animation de chargement de page */
+/* Animation de chargement de page - fluide et douce */
 @keyframes page-fade-in {
   0% {
     opacity: 0;
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .page-transition {
-  animation: page-fade-in 0.5s ease-out;
+  animation: page-fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Classe pour éviter le flash initial */
