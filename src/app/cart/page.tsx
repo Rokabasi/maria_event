@@ -25,7 +25,7 @@ export default function CartPage() {
 
     if (cart.length === 0) {
         return (
-            <div className="min-h-[calc(100vh-400px)] bg-gray-50 flex flex-col">
+            <div className="min-h-[calc(100vh-400px)] bg-gray-50 flex flex-col animate-fade-in-up">
                 <section className="py-12 px-4 flex-1 flex items-center justify-center">
                     <div className="max-w-4xl mx-auto text-center">
                         <h1 className="text-2xl font-bold mb-4">Votre panier</h1>
@@ -47,7 +47,7 @@ export default function CartPage() {
     const total = subtotal + shipping;
 
     return (
-        <div className="min-h-[calc(100vh-80px-200px)] bg-gray-50 flex flex-col">
+        <div className="min-h-[calc(100vh-80px-200px)] bg-gray-50 flex flex-col animate-fade-in-up">
             <section className="py-6 px-4 flex-1">
                 <div className="max-w-xl mx-auto">
                     <h1 className="text-lg font-bold mb-4">Panier</h1>

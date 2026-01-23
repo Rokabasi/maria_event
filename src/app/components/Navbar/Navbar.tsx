@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
@@ -9,6 +9,7 @@ import { useCart } from "../../context/CartContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { getCartCount } = useCart();
 
@@ -34,8 +35,10 @@ export default function Navbar() {
   };
 
   const navigateTo = (path: string) => {
-    setIsMenuOpen(false);
-    router.push(path);
+    startTransition(() => {
+      router.push(path);
+      setIsMenuOpen(false);
+    });
   };
 
   return (
