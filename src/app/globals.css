@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Empêcher le débordement horizontal pendant les animations */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* Cursor pointer pour tous les boutons */
 button {
   cursor: pointer;
