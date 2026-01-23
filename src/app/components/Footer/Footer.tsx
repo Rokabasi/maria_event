@@ -175,13 +175,6 @@ export default function Footer() {
                         >
                             Commander
                         </a>
-                        <span className="text-gray-600">•</span>
-                        <button
-                            onClick={() => router.push('/recommander')}
-                            className="hover:text-white transition-colors"
-                        >
-                            Nous recommander
-                        </button>
                     </div>
                 </div>
             </div>
