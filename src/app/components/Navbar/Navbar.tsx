@@ -15,11 +15,17 @@ export default function Navbar() {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     } else {
       document.body.style.overflow = 'unset';
+      document.body.style.position = 'static';
+      document.body.style.width = 'auto';
     }
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.style.position = 'static';
+      document.body.style.width = 'auto';
     };
   }, [isMenuOpen]);
 
@@ -76,7 +82,7 @@ export default function Navbar() {
           onClick={handleMenuClick}
         >
           <div
-            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-menu-slide-down overflow-y-auto"
+            className="fixed top-0 left-0 w-full h-full bg-white z-45 p-6 animate-menu-slide-down overflow-y-auto overscroll-contain"
             onClick={(e) => e.stopPropagation()}
           >
             <div>

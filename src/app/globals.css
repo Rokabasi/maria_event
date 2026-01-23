@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Configuration de la police */
+* {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
 /* Empêcher le débordement horizontal pendant les animations */
 html, body {
   overflow-x: hidden;
