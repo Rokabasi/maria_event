@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { CartProvider } from "./context/CartContext";
+import StoreProvider from "./store/StoreProvider";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
@@ -34,13 +34,13 @@ export default function RootLayout({
         className={`${montserrat.variable} antialiased overflow-x-hidden`}
         suppressHydrationWarning={true}
       >
-        <CartProvider>
+        <StoreProvider>
           <Navbar />
           <div id="root" className="page-transition overflow-x-hidden">
             {children}
           </div>
           <Footer />
-        </CartProvider>
+        </StoreProvider>
       </body>
     </html>
   );

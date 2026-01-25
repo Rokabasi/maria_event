@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
 import Image from "next/image";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

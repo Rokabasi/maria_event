@@ -1,6 +1,6 @@
 'use client';
 
-import { useCart } from "../context/CartContext";
+import { useCart } from "../hooks/useCart";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {

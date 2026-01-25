@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useState, useMemo, useEffect } from "react";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 import { productsDatabase } from "../../data/products";
 
 export default function ProductDetailPage() {

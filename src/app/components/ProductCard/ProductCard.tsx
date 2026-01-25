@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 interface ProductCardProps {
     title: string;
