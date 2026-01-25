@@ -43,7 +43,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 relative z-50 bg-white sticky top-0 shadow-sm">
+      <div className="flex items-center justify-between p-4 z-50 bg-white sticky top-0 shadow-sm h-20">
         <Menu isActive={isMenuOpen} onClick={handleMenuClick} />
         <div onClick={() => navigateTo('/')} className="cursor-pointer">
           <Logo />

@@ -81,7 +81,7 @@ export default function CustomerReviews() {
                 {/* Slider d'avis */}
                 <div className="relative bg-white rounded-2xl shadow-lg p-6 mb-6">
                     <div className="flex items-start gap-4 mb-4">
-                        <div className={`w-12 h-12 ${reviews[currentReview].color} rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0`}>
+                        <div className={`w-12 h-12 ${reviews[currentReview].color} rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0`}>
                             {reviews[currentReview].avatar}
                         </div>
                         <div className="flex-1">

@@ -13,7 +13,7 @@ export default function CategoryCard({ title, subtitle, image }: CategoryCardPro
                 alt={title}
                 className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-black/60 to-black/20"></div>
             <div className="relative z-10 p-4 h-full flex flex-col justify-end">
                 <h3 className="font-semibold text-white">{title}</h3>
                 <p className="text-sm text-gray-200">{subtitle}</p>

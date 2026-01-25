@@ -36,7 +36,7 @@ export default function Categories() {
                 {/* Badge nouveauté */}
                 <AnimatedSection animation="fade-scale" delay={300}>
                     <div className="flex justify-center mb-6">
-                        <div className="bg-gradient-to-r from-black to-gray-800 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+                        <div className="bg-linear-to-r from-black to-gray-800 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
                             <span className="animate-pulse">🔥</span>
                             Nouveaux produits disponibles
                         </div>

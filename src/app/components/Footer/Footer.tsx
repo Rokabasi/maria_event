@@ -8,7 +8,7 @@ export default function Footer() {
     const router = useRouter();
 
     return (
-        <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-12 px-4">
+        <footer className="bg-linear-to-br from-gray-900 to-gray-800 text-white py-12 px-4 lg:h-90">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                     {/* À propos */}
@@ -152,7 +152,7 @@ export default function Footer() {
                 </div>
 
                 {/* Barre de séparation avec gradient */}
-                <div className="h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent mb-8"></div>
+                <div className="h-px bg-linear-to-r from-transparent via-pink-500 to-transparent mb-8"></div>
 
                 {/* Bottom */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">

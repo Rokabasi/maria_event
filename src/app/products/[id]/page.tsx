@@ -79,7 +79,7 @@ export default function ProductDetailPage() {
                             style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
                         >
                             {product.images.map((image, index) => (
-                                <div key={index} className="min-w-full h-full flex-shrink-0">
+                                <div key={index} className="min-w-full h-full shrink-0">
                                     <img
                                         src={image}
                                         alt={`${product.title} - Image ${index + 1}`}
