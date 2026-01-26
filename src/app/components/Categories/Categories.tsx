@@ -73,6 +73,8 @@ export default function Categories() {
                                 price={`$${product.price}`}
                                 image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
                                 isNew={true}
+                                brand={product.brand}
+                                category={product.category}
                             />
                         ))}
                     </StaggeredGrid>
