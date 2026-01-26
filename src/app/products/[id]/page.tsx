@@ -14,9 +14,24 @@ export default function ProductDetailPage() {
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState("M");
+    const [selectedPreset, setSelectedPreset] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const productId = decodeURIComponent(params.id as string);
+
+    // Détection du type de produit
+    const isShoe = product?.brand?.toLowerCase().includes('basket') ||
+        product?.brand?.toLowerCase().includes('chaussure') ||
+        product?.category?.toLowerCase().includes('basket') ||
+        product?.category?.toLowerCase().includes('chaussure');
+
+    const isDragee = product?.brand?.toLowerCase().includes('dragée') ||
+        product?.brand?.toLowerCase().includes('dragee') ||
+        product?.title?.toLowerCase().includes('dragée') ||
+        product?.title?.toLowerCase().includes('dragee');
+
+    const shoeSizes = ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
+    const drageePresets = ['250g', '500g', '1kg', '2kg', '5kg'];
 
     useEffect(() => {
         dispatch(fetchProductById(productId));
@@ -24,6 +39,17 @@ export default function ProductDetailPage() {
             dispatch(clearProduct());
         };
     }, [dispatch, productId]);
+
+    // Initialiser les valeurs par défaut selon le type de produit
+    useEffect(() => {
+        if (product) {
+            if (isShoe) {
+                setSelectedSize(shoeSizes[0]);
+            } else if (isDragee) {
+                setSelectedPreset(drageePresets[0]);
+            }
+        }
+    }, [product, isShoe, isDragee]);
 
     // Auto-scroll slider
     useEffect(() => {
@@ -40,9 +66,9 @@ export default function ProductDetailPage() {
         addToCart({
             id: product.id,
             title: product.title,
-            price: `$${product.price}`,
+            price: `${product.price}`,
             image: product.images[0],
-            size: selectedSize,
+            size: isShoe ? selectedSize : (isDragee ? selectedPreset : 'Standard'),
             quantity: quantity
         });
     };
@@ -52,9 +78,9 @@ export default function ProductDetailPage() {
         addToCart({
             id: product.id,
             title: product.title,
-            price: `$${product.price}`,
+            price: `${product.price}`,
             image: product.images[0],
-            size: selectedSize,
+            size: isShoe ? selectedSize : (isDragee ? selectedPreset : 'Standard'),
             quantity: quantity
         });
         router.push('/cart');
@@ -154,8 +180,54 @@ export default function ProductDetailPage() {
                         {/* Description */}
                         <p className="text-gray-500 text-xs lg:text-base leading-relaxed mb-5 lg:mb-8 whitespace-pre-line">{product.description}</p>
 
-                        {/* Sélection de la taille */}
-                        {product.sizes.length > 0 && (
+                        {/* Pointures pour baskets */}
+                        {isShoe && (
+                            <div className="mb-5 lg:mb-8">
+                                <label className="block font-bold text-base lg:text-lg mb-3">
+                                    Pointure: <span className="font-normal">{selectedSize}</span>
+                                </label>
+                                <div className="grid grid-cols-6 gap-2">
+                                    {shoeSizes.map((size) => (
+                                        <button
+                                            key={size}
+                                            onClick={() => setSelectedSize(size)}
+                                            className={`h-10 lg:h-12 rounded-lg font-semibold text-xs lg:text-sm transition-all ${selectedSize === size
+                                                ? 'bg-black text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                }`}
+                                        >
+                                            {size}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Presets de quantité pour dragées */}
+                        {isDragee && (
+                            <div className="mb-5 lg:mb-8">
+                                <label className="block font-bold text-base lg:text-lg mb-3">
+                                    Quantité: <span className="font-normal">{selectedPreset}</span>
+                                </label>
+                                <div className="grid grid-cols-3 gap-2">
+                                    {drageePresets.map((preset) => (
+                                        <button
+                                            key={preset}
+                                            onClick={() => setSelectedPreset(preset)}
+                                            className={`h-10 lg:h-12 rounded-lg font-semibold text-xs lg:text-sm transition-all ${selectedPreset === preset
+                                                ? 'bg-black text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                }`}
+                                        >
+                                            {preset}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Sélection de la taille (pour autres produits) */}
+                        {!isShoe && !isDragee && product.sizes.length > 0 && (
                             <div className="mb-5 lg:mb-8">
                                 <div className="flex items-center justify-between mb-3">
                                     <span className="font-bold text-base lg:text-lg">Taille: <span className="font-normal">{selectedSize}</span></span>
@@ -177,30 +249,32 @@ export default function ProductDetailPage() {
                             </div>
                         )}
 
-                        {/* Quantité */}
-                        <div className="mb-5 lg:mb-8">
-                            <span className="font-bold text-base lg:text-lg block mb-3">Quantité</span>
-                            <div className="flex items-center gap-3">
-                                <button
-                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                    className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                </button>
-                                <span className="text-lg lg:text-xl font-semibold w-8 text-center">{quantity}</span>
-                                <button
-                                    onClick={() => setQuantity(quantity + 1)}
-                                    className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                </button>
+                        {/* Quantité (pour autres produits) */}
+                        {!isDragee && (
+                            <div className="mb-5 lg:mb-8">
+                                <span className="font-bold text-base lg:text-lg block mb-3">Quantité</span>
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                        className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                        </svg>
+                                    </button>
+                                    <span className="text-lg lg:text-xl font-semibold w-8 text-center">{quantity}</span>
+                                    <button
+                                        onClick={() => setQuantity(quantity + 1)}
+                                        className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <line x1="12" y1="5" x2="12" y2="19" />
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Boutons d'action */}
                         <div className="flex gap-2.5 lg:gap-4">

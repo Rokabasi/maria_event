@@ -18,7 +18,7 @@ function DrageeCard() {
 
     return (
         <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg">
-            <div className="h-48 overflow-hidden relative">
+            <div className="h-64 overflow-hidden relative">
                 <div
                     className="flex transition-transform duration-500 ease-in-out h-full"
                     style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
@@ -50,7 +50,7 @@ function DrageeCard() {
                     <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
                         <span className="text-2xl">🍬</span>
                     </div>
-                    <h3 className="text-xl font-bold">Dragées Artisanales</h3>
+                    <h3 className="text-xl font-bold">Dragées de bonne qualité</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
                     Dragées de qualité supérieure pour tous vos événements : mariages, baptêmes, communions.
@@ -76,7 +76,7 @@ export default function AboutPage() {
                     <div className="absolute inset-0 bg-black/40 z-10"></div>
                     <div className="absolute inset-0 z-0">
                         <img
-                            src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=400&fit=crop"
+                            src="/dragee2.jpeg"
                             alt="Maria Event"
                             className="w-full h-full object-cover opacity-50"
                         />
@@ -112,7 +112,7 @@ export default function AboutPage() {
                             </div>
                             <div className="rounded-2xl overflow-hidden shadow-lg h-[300px] md:h-[400px]">
                                 <img
-                                    src="/dragee.jpeg"
+                                    src="/dragee1.jpeg"
                                     alt="Notre histoire"
                                     className="w-full h-full object-cover"
                                 />
@@ -126,7 +126,7 @@ export default function AboutPage() {
                         <div className="grid md:grid-cols-2 gap-6 mb-12">
                             {/* Baskets Card */}
                             <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg">
-                                <div className="h-48 overflow-hidden">
+                                <div className="h-64 overflow-hidden">
                                     <img
                                         src="/basket.jpg"
                                         alt="Baskets"
