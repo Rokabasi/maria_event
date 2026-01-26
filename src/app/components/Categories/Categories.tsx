@@ -1,16 +1,27 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { fetchNouveautes } from '@/app/store/slices/nouveautesSlice';
 import ProductCard from "../ProductCard/ProductCard";
-import { nouveautesData } from "../../data/nouveautes";
 import StaggeredGrid from "../StaggeredGrid/StaggeredGrid";
 import AnimatedSection from "../AnimatedSection/AnimatedSection";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
 export default function Categories() {
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const { products, loading } = useAppSelector((state) => state.nouveautes);
+
+    useEffect(() => {
+        if (products.length === 0) {
+            dispatch(fetchNouveautes());
+        }
+    }, [dispatch, products.length]);
 
     // Afficher seulement les 2 premiers produits nouveautés
-    const nouveautes = nouveautesData.slice(0, 2);
+    const nouveautes = products.slice(0, 2);
 
     return (
         <section className="py-12 px-4">
@@ -43,20 +54,28 @@ export default function Categories() {
                     </div>
                 </AnimatedSection>
 
-                <StaggeredGrid
-                    className="grid grid-cols-2 md:grid-cols-2 gap-2"
-                    delay={300}
-                >
-                    {nouveautes.map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            title={product.title}
-                            price={product.price}
-                            image={product.image}
-                            isNew={product.isNew}
-                        />
-                    ))}
-                </StaggeredGrid>
+                {loading ? (
+                    <div className="grid grid-cols-2 md:grid-cols-2 gap-2">
+                        {[...Array(2)].map((_, index) => (
+                            <SkeletonLoader key={index} />
+                        ))}
+                    </div>
+                ) : (
+                    <StaggeredGrid
+                        className="grid grid-cols-2 md:grid-cols-2 gap-2"
+                        delay={300}
+                    >
+                        {nouveautes.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                title={product.title}
+                                price={`$${product.price}`}
+                                image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
+                                isNew={true}
+                            />
+                        ))}
+                    </StaggeredGrid>
+                )}
             </div>
         </section>
     );

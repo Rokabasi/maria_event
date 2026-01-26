@@ -1,14 +1,23 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { fetchNouveautes } from '@/app/store/slices/nouveautesSlice';
 import ProductCard from "../components/ProductCard/ProductCard";
-import { nouveautesData } from "../data/nouveautes";
 import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
 import StaggeredGrid from "../components/StaggeredGrid/StaggeredGrid";
+import SkeletonLoader from "../components/SkeletonLoader/SkeletonLoader";
 
 export default function NouveautesPage() {
-    const nouveautes = nouveautesData;
+    const dispatch = useAppDispatch();
+    const { products, loading, error } = useAppSelector((state) => state.nouveautes);
+
+    useEffect(() => {
+        dispatch(fetchNouveautes());
+    }, [dispatch]);
 
     return (
         <div className="min-h-screen bg-gray-50 page-transition">
-
             <section className="py-12 px-4">
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
@@ -28,21 +37,52 @@ export default function NouveautesPage() {
                         </div>
                     </AnimatedSection>
 
+                    {/* Loading state */}
+                    {loading && (
+                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-12">
+                            {[...Array(8)].map((_, index) => (
+                                <SkeletonLoader key={index} />
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Error state */}
+                    {error && (
+                        <div className="text-center text-red-500 mb-12">
+                            <p className="mb-4">Erreur lors du chargement des nouveautés</p>
+                            <button
+                                onClick={() => dispatch(fetchNouveautes())}
+                                className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors"
+                            >
+                                Réessayer
+                            </button>
+                        </div>
+                    )}
+
                     {/* Grille de nouveautés */}
-                    <StaggeredGrid
-                        className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-12"
-                        delay={200}
-                    >
-                        {nouveautes.map((product, index) => (
-                            <ProductCard
-                                key={index}
-                                title={product.title}
-                                price={product.price}
-                                image={product.image}
-                                isNew={product.isNew}
-                            />
-                        ))}
-                    </StaggeredGrid>
+                    {!loading && !error && products.length > 0 && (
+                        <StaggeredGrid
+                            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-12"
+                            delay={200}
+                        >
+                            {products.map((product) => (
+                                <ProductCard
+                                    key={product.id}
+                                    title={product.title}
+                                    price={`$${product.price}`}
+                                    image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
+                                    isNew={true}
+                                />
+                            ))}
+                        </StaggeredGrid>
+                    )}
+
+                    {/* Empty state */}
+                    {!loading && !error && products.length === 0 && (
+                        <div className="text-center text-gray-500 mb-12">
+                            <p>Aucune nouveauté disponible pour le moment</p>
+                        </div>
+                    )}
 
                     {/* Section informative */}
                     <AnimatedSection animation="fade-bottom-left" delay={400}>

@@ -67,7 +67,7 @@ export default function Nouveautes() {
                         <ProductCard
                             key={product.id}
                             title={product.title}
-                            price={`${product.price}€`}
+                            price={`$${product.price}`}
                             image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
                             isNew={true}
                         />
