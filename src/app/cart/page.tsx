@@ -10,7 +10,7 @@ export default function CartPage() {
     const handleWhatsAppOrder = () => {
         const phoneNumber = "243970638618";
         let message = "*MARIA EVENT*\n";
-        message += "Nouvelle Commande\n\n";
+        message += "Nouvelle commande depuis le site internet\n\n";
         cart.forEach((item, index) => {
             message += `${index + 1}. *${item.title}*\n`;
             message += `   Taille: ${item.size}\n`;

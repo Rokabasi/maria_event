@@ -98,7 +98,7 @@ export default function NouveautesPage() {
 
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                                     <a
-                                        href="https://wa.me/243819600518?text=*MARIA%20EVENT*%0ABonjour,%20je%20souhaite%20être%20informé%20des%20nouveautés%20et%20offres%20spéciales."
+                                        href="https://wa.me/243970638618?text=*MARIA%20EVENT*%0ABonjour,%20je%20souhaite%20être%20informé%20des%20nouveautés%20et%20offres%20spéciales."
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-full font-medium hover:bg-green-600 transition-all duration-200 transform hover:scale-105"

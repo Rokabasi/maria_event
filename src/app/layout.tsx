@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./store/StoreProvider";
+import { ToastProvider } from "./context/ToastContext";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
@@ -35,11 +36,13 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <StoreProvider>
-          <Navbar />
-          <div id="root" className="page-transition overflow-x-hidden">
-            {children}
-          </div>
-          <Footer />
+          <ToastProvider>
+            <Navbar />
+            <div id="root" className="page-transition overflow-x-hidden">
+              {children}
+            </div>
+            <Footer />
+          </ToastProvider>
         </StoreProvider>
       </body>
     </html>

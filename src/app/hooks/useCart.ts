@@ -12,18 +12,21 @@ import {
     selectCartCount,
     selectCartTotal,
 } from '../store/selectors/cartSelectors';
+import { useToast } from '../context/ToastContext';
 
 export function useCart() {
     const dispatch = useAppDispatch();
     const cart = useAppSelector(selectCartItems);
     const cartCount = useAppSelector(selectCartCount);
     const cartTotal = useAppSelector(selectCartTotal);
+    const { showToast } = useToast();
 
     const addToCart = useCallback(
         (item: CartItem) => {
             dispatch(addToCartAction(item));
+            showToast('Produit ajouté au panier');
         },
-        [dispatch]
+        [dispatch, showToast]
     );
 
     const removeFromCart = useCallback(
