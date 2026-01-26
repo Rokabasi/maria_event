@@ -42,7 +42,7 @@ const transformProduct = (apiProduct: ApiProduct): Product => ({
     rating: 4.5,
     reviews: 0,
     description: apiProduct.pro_description,
-    images: apiProduct.documents?.map((doc) => `/images/${doc.doc_name}`) || [],
+    images: apiProduct.documents?.map((doc) => `http://localhost:3002/images/${doc.doc_name}`) || [],
     sizes: [],
     showPrice: apiProduct.show_price,
     category: apiProduct.public?.pu_nom || '',
