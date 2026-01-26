@@ -4,20 +4,21 @@ import { useRouter } from "next/navigation";
 import { useCart } from "../../hooks/useCart";
 
 interface ProductCardProps {
+    id?: string;
     title: string;
     price: string;
     image: string;
     isNew?: boolean;
 }
 
-export default function ProductCard({ title, price, image, isNew }: ProductCardProps) {
+export default function ProductCard({ id, title, price, image, isNew }: ProductCardProps) {
     const router = useRouter();
     const { addToCart } = useCart();
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
         addToCart({
-            id: encodeURIComponent(title),
+            id: id || encodeURIComponent(title),
             title,
             price,
             image,
@@ -30,7 +31,7 @@ export default function ProductCard({ title, price, image, isNew }: ProductCardP
         <div className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
             <div
                 className="cursor-pointer"
-                onClick={() => router.push(`/products/${encodeURIComponent(title)}`)}
+                onClick={() => router.push(`/products/${id || encodeURIComponent(title)}`)}
             >
                 <div className="relative overflow-hidden">
                     <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">

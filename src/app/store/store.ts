@@ -4,6 +4,7 @@ import nouveautesReducer from './slices/nouveautesSlice';
 import populaireReducer from './slices/populaireSlice';
 import randomReducer from './slices/randomSlice';
 import catalogueReducer from './slices/catalogueSlice';
+import productDetailReducer from './slices/productDetailSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         populaire: populaireReducer,
         random: randomReducer,
         catalogue: catalogueReducer,
+        productDetail: productDetailReducer,
     },
 });
 

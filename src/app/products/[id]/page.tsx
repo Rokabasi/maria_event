@@ -1,13 +1,16 @@
 'use client';
 
 import { useParams, useRouter } from "next/navigation";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { fetchProductById, clearProduct } from '@/app/store/slices/productDetailSlice';
 import { useCart } from "../../hooks/useCart";
-import { productsDatabase } from "../../data/products";
 
 export default function ProductDetailPage() {
     const params = useParams();
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const { product, loading, error } = useAppSelector((state) => state.productDetail);
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState("M");
@@ -15,37 +18,29 @@ export default function ProductDetailPage() {
 
     const productId = decodeURIComponent(params.id as string);
 
-    const product = useMemo(() => {
-        const foundProduct = productsDatabase[productId];
-        if (!foundProduct) {
-            return {
-                id: productId,
-                title: productId,
-                price: "0.00",
-                brand: "Maria Event",
-                rating: 4.5,
-                reviews: 0,
-                description: "Produit non trouvé",
-                images: ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop"],
-                sizes: ["S", "M", "L", "XL"]
-            };
-        }
-        return { id: productId, ...foundProduct };
-    }, [productId]);
+    useEffect(() => {
+        dispatch(fetchProductById(productId));
+        return () => {
+            dispatch(clearProduct());
+        };
+    }, [dispatch, productId]);
 
     // Auto-scroll slider
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [product.images.length]);
+        if (product && product.images.length > 1) {
+            const interval = setInterval(() => {
+                setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+            }, 3000);
+            return () => clearInterval(interval);
+        }
+    }, [product]);
 
     const handleAddToCart = () => {
+        if (!product) return;
         addToCart({
             id: product.id,
             title: product.title,
-            price: `${product.price}€`,
+            price: `$${product.price}`,
             image: product.images[0],
             size: selectedSize,
             quantity: quantity
@@ -53,19 +48,44 @@ export default function ProductDetailPage() {
     };
 
     const handleBuyNow = () => {
-        // Ajouter le produit au panier
+        if (!product) return;
         addToCart({
             id: product.id,
             title: product.title,
-            price: `${product.price}€`,
+            price: `$${product.price}`,
             image: product.images[0],
             size: selectedSize,
             quantity: quantity
         });
-
-        // Rediriger vers le panier
         router.push('/cart');
     };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                    <p className="text-gray-600">Chargement du produit...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error || !product) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-4">Produit non trouvé</h2>
+                    <button
+                        onClick={() => router.push('/products')}
+                        className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors"
+                    >
+                        Retour au catalogue
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -90,16 +110,18 @@ export default function ProductDetailPage() {
                             </div>
                         </div>
                         {/* Indicateurs de pagination */}
-                        <div className="flex justify-center gap-2">
-                            {product.images.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentImageIndex(index)}
-                                    className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === index ? 'bg-black w-6' : 'bg-gray-300'
-                                        }`}
-                                />
-                            ))}
-                        </div>
+                        {product.images.length > 1 && (
+                            <div className="flex justify-center gap-2">
+                                {product.images.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setCurrentImageIndex(index)}
+                                        className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === index ? 'bg-black w-6' : 'bg-gray-300'
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Détails du produit - Droite sur desktop */}
@@ -125,31 +147,35 @@ export default function ProductDetailPage() {
 
                         {/* Titre et prix */}
                         <h2 className="text-xl lg:text-3xl font-bold mb-2">{product.title}</h2>
-                        <p className="text-xl lg:text-2xl font-bold text-gray-900 mb-3 lg:mb-5">${product.price}</p>
+                        {product.showPrice && (
+                            <p className="text-xl lg:text-2xl font-bold text-gray-900 mb-3 lg:mb-5">${product.price}</p>
+                        )}
 
                         {/* Description */}
-                        <p className="text-gray-500 text-xs lg:text-base leading-relaxed mb-5 lg:mb-8">{product.description}</p>
+                        <p className="text-gray-500 text-xs lg:text-base leading-relaxed mb-5 lg:mb-8 whitespace-pre-line">{product.description}</p>
 
                         {/* Sélection de la taille */}
-                        <div className="mb-5 lg:mb-8">
-                            <div className="flex items-center justify-between mb-3">
-                                <span className="font-bold text-base lg:text-lg">Taille: <span className="font-normal">{selectedSize}</span></span>
+                        {product.sizes.length > 0 && (
+                            <div className="mb-5 lg:mb-8">
+                                <div className="flex items-center justify-between mb-3">
+                                    <span className="font-bold text-base lg:text-lg">Taille: <span className="font-normal">{selectedSize}</span></span>
+                                </div>
+                                <div className="flex gap-2">
+                                    {product.sizes.map((size) => (
+                                        <button
+                                            key={size}
+                                            onClick={() => setSelectedSize(size)}
+                                            className={`w-12 h-12 lg:w-14 lg:h-14 rounded-full font-semibold text-sm lg:text-base transition-all ${selectedSize === size
+                                                ? 'bg-black text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                }`}
+                                        >
+                                            {size}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="flex gap-2">
-                                {product.sizes.map((size) => (
-                                    <button
-                                        key={size}
-                                        onClick={() => setSelectedSize(size)}
-                                        className={`w-12 h-12 lg:w-14 lg:h-14 rounded-full font-semibold text-sm lg:text-base transition-all ${selectedSize === size
-                                            ? 'bg-black text-white'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                            }`}
-                                    >
-                                        {size}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
+                        )}
 
                         {/* Quantité */}
                         <div className="mb-5 lg:mb-8">

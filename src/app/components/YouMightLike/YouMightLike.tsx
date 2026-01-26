@@ -32,6 +32,7 @@ export default function YouMightLike() {
                         {displayedProducts.map((product) => (
                             <ProductCard
                                 key={product.id}
+                                id={product.id}
                                 title={product.title}
                                 price={`$${product.price}`}
                                 image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
