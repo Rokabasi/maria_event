@@ -1,26 +1,23 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { fetchPopulaire } from '@/app/store/slices/populaireSlice';
 import ProductCard from "../ProductCard/ProductCard";
 import StaggeredGrid from "../StaggeredGrid/StaggeredGrid";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
 export default function ProductGrid() {
-    const [showAll, setShowAll] = useState(false);
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const { products, loading } = useAppSelector((state) => state.populaire);
 
-    const products = [
-        { title: "Nike Air Max", price: "120€", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", isNew: true },
-        { title: "Adidas Ultraboost", price: "150€", image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop" },
-        { title: "Dragées Amande Rose", price: "12€", image: "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=400&h=400&fit=crop" },
-        { title: "Jordan Retro", price: "180€", image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=400&h=400&fit=crop" },
-        { title: "Dragées Chocolat Assortis", price: "15€", image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=400&fit=crop" },
-        { title: "Puma RS-X", price: "95€", image: "https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&h=400&fit=crop" },
-        { title: "Converse Chuck Taylor", price: "65€", image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=400&h=400&fit=crop" },
-        { title: "Dragées Praline", price: "18€", image: "https://images.unsplash.com/photo-1481391243133-f96216dcb5d2?w=400&h=400&fit=crop" }
-    ];
+    useEffect(() => {
+        dispatch(fetchPopulaire());
+    }, [dispatch]);
 
-    const displayedProducts = showAll ? products : products.slice(0, 4);
+    const displayedProducts = products.slice(0, 4);
 
     return (
         <section className="py-12 px-4">
@@ -28,21 +25,31 @@ export default function ProductGrid() {
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-base font-bold">Produits populaires</h2>
                 </div>
-                <StaggeredGrid
-                    className="grid grid-cols-2 md:grid-cols-4 gap-2"
-                    delay={250}
-                >
-                    {displayedProducts.map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            title={product.title}
-                            price={product.price}
-                            image={product.image}
-                            isNew={product.isNew}
-                        />
-                    ))}
-                </StaggeredGrid>
-                {!showAll && (
+
+                {loading ? (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {[...Array(4)].map((_, index) => (
+                            <SkeletonLoader key={index} />
+                        ))}
+                    </div>
+                ) : (
+                    <StaggeredGrid
+                        className="grid grid-cols-2 md:grid-cols-4 gap-2"
+                        delay={250}
+                    >
+                        {displayedProducts.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                title={product.title}
+                                price={`$${product.price}`}
+                                image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
+                                isNew={false}
+                            />
+                        ))}
+                    </StaggeredGrid>
+                )}
+
+                {!loading && products.length > 4 && (
                     <div className="text-center mt-8">
                         <button
                             onClick={() => router.push('/products')}

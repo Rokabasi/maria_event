@@ -56,7 +56,11 @@ export const api = {
         return response.data.map(transformProduct);
     },
 
-    // Récupérer tous les produits
+    // Récupérer les produits populaires
+    getPopulaire: async (): Promise<Product[]> => {
+        const response = await axios.get<ApiProduct[]>('/api/produits/popular');
+        return response.data.map(transformProduct);
+    },
     getProducts: async (): Promise<Product[]> => {
         const response = await axios.get<ApiProduct[]>('/api/produits');
         return response.data.map(transformProduct);
