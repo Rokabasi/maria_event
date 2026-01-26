@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useCart } from '../../hooks/useCart';
-import Toast from '../Toast/Toast';
 
 interface AddToCartModalProps {
     isOpen: boolean;
@@ -24,7 +23,6 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedPreset, setSelectedPreset] = useState('');
     const [mounted, setMounted] = useState(false);
-    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -68,7 +66,6 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
             quantity: quantity
         });
         onClose();
-        setShowToast(true);
     };
 
     if (!isOpen || !mounted) return null;
@@ -197,11 +194,6 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
                 </div>,
                 document.body
             )}
-            <Toast
-                message="Produit ajouté au panier"
-                isVisible={showToast}
-                onClose={() => setShowToast(false)}
-            />
         </>
     );
 }
