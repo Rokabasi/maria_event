@@ -61,6 +61,18 @@ export const api = {
         const response = await axios.get<ApiProduct[]>('/api/produits/popular');
         return response.data.map(transformProduct);
     },
+
+    // Récupérer des produits aléatoires
+    getRandom: async (): Promise<Product[]> => {
+        const response = await axios.get<ApiProduct[]>('/api/produits/random');
+        return response.data.map(transformProduct);
+    },
+
+    // Récupérer le catalogue complet
+    getCatalogue: async (): Promise<Product[]> => {
+        const response = await axios.get<ApiProduct[]>('/api/produits/catalogue');
+        return response.data.map(transformProduct);
+    },
     getProducts: async (): Promise<Product[]> => {
         const response = await axios.get<ApiProduct[]>('/api/produits');
         return response.data.map(transformProduct);
