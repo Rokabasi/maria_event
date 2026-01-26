@@ -9,7 +9,9 @@ export const selectCartCount = createSelector([selectCartItems], (items) =>
 
 export const selectCartTotal = createSelector([selectCartItems], (items) =>
     items.reduce((total, item) => {
-        const price = parseFloat(item.price.replace('€', ''));
+        // Extraire le nombre du prix (supporte $59.99, 59.99€, 59.99, etc.)
+        const priceString = item.price.replace(/[^0-9.]/g, '');
+        const price = parseFloat(priceString) || 0;
         return total + price * item.quantity;
     }, 0)
 );

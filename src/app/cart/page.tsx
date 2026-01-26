@@ -8,7 +8,7 @@ export default function CartPage() {
     const router = useRouter();
 
     const handleWhatsAppOrder = () => {
-        const phoneNumber = "243819600518";
+        const phoneNumber = "243970638618";
         let message = "*MARIA EVENT*\n";
         message += "Nouvelle Commande\n\n";
         cart.forEach((item, index) => {
@@ -17,7 +17,7 @@ export default function CartPage() {
             message += `   Quantité: ${item.quantity}\n`;
             message += `   Prix: ${item.price}\n\n`;
         });
-        message += `*Total: ${getCartTotal().toFixed(2)}€*\n\n`;
+        message += `*Total: $${getCartTotal().toFixed(2)}*\n\n`;
         message += "Merci de confirmer cette commande.";
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
@@ -43,8 +43,7 @@ export default function CartPage() {
     }
 
     const subtotal = getCartTotal();
-    const shipping = 20;
-    const total = subtotal + shipping;
+    const total = subtotal;
 
     return (
         <div className="min-h-[calc(100vh-80px-360px)] bg-gray-50 flex flex-col animate-fade-in-up">
@@ -69,7 +68,7 @@ export default function CartPage() {
                                 <div className="flex-1 min-w-0">
                                     <h3 className="font-bold text-sm mb-0.5 truncate">{item.title}</h3>
                                     <p className="text-gray-400 text-xs mb-1.5">Taille: {item.size}</p>
-                                    <p className="font-bold text-sm">${parseFloat(item.price.replace('€', '')).toFixed(2)}</p>
+                                    <p className="font-bold text-sm">{item.price}</p>
                                 </div>
                                 <button onClick={() => removeFromCart(item.id, item.size)} className="text-red-500 hover:text-red-600 absolute top-3 right-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -92,10 +91,6 @@ export default function CartPage() {
                         <div className="flex justify-between text-gray-400 text-sm">
                             <span>Sous-total</span>
                             <span className="text-black font-semibold">${subtotal.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between text-gray-400 text-sm">
-                            <span>Livraison</span>
-                            <span className="text-black font-semibold">${shipping.toFixed(2)}</span>
                         </div>
                         <div className="border-t border-dashed border-gray-300 pt-2.5"></div>
                         <div className="flex justify-between text-base font-bold">
