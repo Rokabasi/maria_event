@@ -15,12 +15,14 @@ export default function CartPage() {
             message += `${index + 1}. *${item.title}*\n`;
             message += `   Taille: ${item.size}\n`;
             message += `   Quantité: ${item.quantity}\n`;
-            message += `   Prix: ${item.price}\n\n`;
+            message += `   Prix: ${item.price}\n`;
+            message += `   Image: ${item.image}\n\n`;
         });
         message += `*Total: $${getCartTotal().toFixed(2)}*\n\n`;
         message += "Merci de confirmer cette commande.";
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        clearCart();
     };
 
     if (cart.length === 0) {
