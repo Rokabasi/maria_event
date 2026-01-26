@@ -128,7 +128,7 @@ export default function AboutPage() {
                             <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg">
                                 <div className="h-48 overflow-hidden">
                                     <img
-                                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=300&fit=crop"
+                                        src="/basket.jpg"
                                         alt="Baskets"
                                         className="w-full h-full object-cover"
                                     />
@@ -204,7 +204,7 @@ export default function AboutPage() {
                                 </p>
                                 <div className="flex justify-center">
                                     <a
-                                        href="https://wa.me/243819600518?text=*MARIA%20EVENT*%0ABonjour,%20j'aimerais%20avoir%20des%20informations%20sur%20vos%20produits."
+                                        href="https://wa.me/243970638618?text=*MARIA%20EVENT*%0ABonjour,%20j'aimerais%20avoir%20des%20informations%20sur%20vos%20produits."
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-full font-medium shadow-lg whitespace-nowrap text-sm sm:text-base"
