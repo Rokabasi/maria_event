@@ -5,6 +5,7 @@ import ProductGrid from "./components/ProductGrid/ProductGrid";
 import ExclusiveOffers from "./components/ExclusiveOffers/ExclusiveOffers";
 import CustomerReviews from "./components/CustomerReviews/CustomerReviews";
 import YouMightLike from "./components/YouMightLike/YouMightLike";
+import Nouveautes from "./components/Nouveautes/Nouveautes";
 import AnimatedSection from "./components/AnimatedSection/AnimatedSection";
 
 export default function Home() {
@@ -15,6 +16,9 @@ export default function Home() {
       </AnimatedSection>
       <AnimatedSection animation="fade-bottom-left" delay={300}>
         <Categories />
+      </AnimatedSection>
+      <AnimatedSection animation="fade-bottom-right" delay={400}>
+        <Nouveautes />
       </AnimatedSection>
       <AnimatedSection animation="fade-bottom-right" delay={400}>
         <ProductGrid />
