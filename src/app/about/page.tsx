@@ -112,7 +112,7 @@ export default function AboutPage() {
                             </div>
                             <div className="rounded-2xl overflow-hidden shadow-lg h-[300px] md:h-[400px]">
                                 <img
-                                    src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop"
+                                    src="/dragee.jpeg"
                                     alt="Notre histoire"
                                     className="w-full h-full object-cover"
                                 />
