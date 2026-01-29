@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { fetchCatalogue } from '@/app/store/slices/catalogueSlice';
+import { fetchCatalogue, fetchCatalogueById } from '@/app/store/slices/catalogueSlice';
+import { fetchTypeProduit } from '@/app/store/slices/typeProduitSlice';
 import ProductCard from "../components/ProductCard/ProductCard";
 import SkeletonLoader from "../components/SkeletonLoader/SkeletonLoader";
 import StaggeredGrid from "../components/StaggeredGrid/StaggeredGrid";
@@ -11,20 +12,40 @@ import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
 export default function ProductsPage() {
     const dispatch = useAppDispatch();
     const { products, loading } = useAppSelector((state) => state.catalogue);
-    const [selectedCategory, setSelectedCategory] = useState("Tous");
+    const { types } = useAppSelector((state) => state.typeProduit);
+    const [selectedTypeId, setSelectedTypeId] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         dispatch(fetchCatalogue());
+        dispatch(fetchTypeProduit());
     }, [dispatch]);
 
-    // Extraire les catégories uniques des produits
-    const categories = ["Tous", ...Array.from(new Set(products.map(p => p.category).filter(Boolean)))];
+    // Formater le nom du type pour l'affichage
+    const formatTypeName = (typeName: string): string => {
+        const typeMap: { [key: string]: string } = {
+            'basket': 'Baskets',
+            'dragues': 'Dragées',
+            'chaussure': 'Chaussures'
+        };
+        return typeMap[typeName.toLowerCase()] || typeName;
+    };
+
+    // Gérer le changement de type
+    const handleTypeChange = (typ_id: string | null) => {
+        setSelectedTypeId(typ_id);
+        if (typ_id === null) {
+            // "Tous" sélectionné - récupérer tout le catalogue
+            dispatch(fetchCatalogue());
+        } else {
+            // Type spécifique sélectionné - récupérer les produits de ce type
+            dispatch(fetchCatalogueById(typ_id));
+        }
+    };
 
     const filteredProducts = products.filter(product => {
-        const matchesCategory = selectedCategory === "Tous" || product.category === selectedCategory;
         const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+        return matchesSearch;
     });
 
     return (
@@ -70,20 +91,29 @@ export default function ProductsPage() {
                     </AnimatedSection>
 
                     {/* Filtres par catégorie */}
-                    {!loading && categories.length > 1 && (
+                    {!loading && types.length > 0 && (
                         <AnimatedSection animation="fade-left" delay={400}>
                             <div className="mb-8">
                                 <div className="flex gap-2 overflow-x-auto pb-2">
-                                    {categories.map((category) => (
+                                    <button
+                                        onClick={() => handleTypeChange(null)}
+                                        className={`px-6 py-2 rounded-full font-medium text-sm whitespace-nowrap transition-all duration-200 ${selectedTypeId === null
+                                            ? 'bg-black text-white'
+                                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                                            }`}
+                                    >
+                                        Tous
+                                    </button>
+                                    {types.map((type) => (
                                         <button
-                                            key={category}
-                                            onClick={() => setSelectedCategory(category)}
-                                            className={`px-6 py-2 rounded-full font-medium text-sm whitespace-nowrap transition-all duration-200 transform hover:scale-105 ${selectedCategory === category
+                                            key={type.typ_id}
+                                            onClick={() => handleTypeChange(type.typ_id)}
+                                            className={`px-6 py-2 rounded-full font-medium text-sm whitespace-nowrap transition-all duration-200 ${selectedTypeId === type.typ_id
                                                 ? 'bg-black text-white'
                                                 : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
                                                 }`}
                                         >
-                                            {category}
+                                            {formatTypeName(type.typ_nom)}
                                         </button>
                                     ))}
                                 </div>

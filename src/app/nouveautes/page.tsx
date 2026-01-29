@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { fetchNouveautes } from '@/app/store/slices/nouveautesSlice';
+import { fetchNewest } from '@/app/store/slices/newestSlice';
 import ProductCard from "../components/ProductCard/ProductCard";
 import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
 import StaggeredGrid from "../components/StaggeredGrid/StaggeredGrid";
@@ -10,10 +10,10 @@ import SkeletonLoader from "../components/SkeletonLoader/SkeletonLoader";
 
 export default function NouveautesPage() {
     const dispatch = useAppDispatch();
-    const { products, loading, error } = useAppSelector((state) => state.nouveautes);
+    const { products, loading, error } = useAppSelector((state) => state.newest);
 
     useEffect(() => {
-        dispatch(fetchNouveautes());
+        dispatch(fetchNewest());
     }, [dispatch]);
 
     return (
@@ -51,7 +51,7 @@ export default function NouveautesPage() {
                         <div className="text-center text-red-500 mb-12">
                             <p className="mb-4">Erreur lors du chargement des nouveautés</p>
                             <button
-                                onClick={() => dispatch(fetchNouveautes())}
+                                onClick={() => dispatch(fetchNewest())}
                                 className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors"
                             >
                                 Réessayer
@@ -71,7 +71,7 @@ export default function NouveautesPage() {
                                     id={product.id}
                                     title={product.title}
                                     price={`$${product.price}`}
-                                    image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
+                                    image={product.images[0] || '/placeholder.jpg'}
                                     isNew={true}
                                     brand={product.brand}
                                     category={product.category}
