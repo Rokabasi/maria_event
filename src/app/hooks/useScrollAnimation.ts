@@ -39,6 +39,15 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
         );
 
         if (ref.current) {
+            // Vérifier immédiatement si l'élément est déjà visible
+            const rect = ref.current.getBoundingClientRect();
+            const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+            if (isInitiallyVisible) {
+                setIsVisible(true);
+                setHasBeenObserved(true);
+            }
+
             observer.observe(ref.current);
         }
 
