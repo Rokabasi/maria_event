@@ -21,6 +21,14 @@ export const fetchCatalogue = createAsyncThunk(
     }
 );
 
+export const fetchCatalogueById = createAsyncThunk(
+    'catalogue/fetchCatalogueById',
+    async (typ_id: string) => {
+        const data = await api.getCatalogueById(typ_id);
+        return data;
+    }
+);
+
 const catalogueSlice = createSlice({
     name: 'catalogue',
     initialState,
@@ -38,6 +46,18 @@ const catalogueSlice = createSlice({
             .addCase(fetchCatalogue.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Failed to fetch catalogue';
+            })
+            .addCase(fetchCatalogueById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchCatalogueById.fulfilled, (state, action) => {
+                state.loading = false;
+                state.products = action.payload;
+            })
+            .addCase(fetchCatalogueById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Failed to fetch catalogue by id';
             });
     },
 });

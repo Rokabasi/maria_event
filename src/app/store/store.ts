@@ -5,6 +5,8 @@ import populaireReducer from './slices/populaireSlice';
 import randomReducer from './slices/randomSlice';
 import catalogueReducer from './slices/catalogueSlice';
 import productDetailReducer from './slices/productDetailSlice';
+import newestReducer from './slices/newestSlice';
+import typeProduitReducer from './slices/typeProduitSlice';
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
         random: randomReducer,
         catalogue: catalogueReducer,
         productDetail: productDetailReducer,
+        newest: newestReducer,
+        typeProduit: typeProduitReducer,
     },
 });
 

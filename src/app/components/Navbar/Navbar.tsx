@@ -50,7 +50,7 @@ export default function Navbar() {
         </div>
         <div className="relative">
           <button
-            onClick={() => router.push('/cart')}
+            onClick={() => navigateTo('/cart')}
             className="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all"
           >
             <svg

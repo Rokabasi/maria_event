@@ -73,6 +73,25 @@ export const api = {
         const response = await axios.get<ApiProduct[]>('/api/produits/catalogue');
         return response.data.map(transformProduct);
     },
+
+    // Récupérer le catalogue par type de produit
+    getCatalogueById: async (typ_id: string): Promise<Product[]> => {
+        const response = await axios.get<ApiProduct[]>(`/api/produits/catalogue?typ_id=${typ_id}`);
+        return response.data.map(transformProduct);
+    },
+
+    // Récupérer les produits les plus récents
+    getNewest: async (): Promise<Product[]> => {
+        const response = await axios.get<ApiProduct[]>('/api/produits/newest');
+        return response.data.map(transformProduct);
+    },
+
+    // Récupérer les types de produits
+    getTypeProduit: async (): Promise<any[]> => {
+        const response = await axios.get('/api/types-produit/site');
+        return response.data;
+    },
+
     getProducts: async (): Promise<Product[]> => {
         const response = await axios.get<ApiProduct[]>('/api/produits');
         return response.data.map(transformProduct);
