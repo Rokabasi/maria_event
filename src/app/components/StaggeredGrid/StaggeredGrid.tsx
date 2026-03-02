@@ -60,7 +60,7 @@ export default function StaggeredGrid({
             {children.map((child, index) => (
                 <div
                     key={index}
-                    ref={el => itemRefs.current[index] = el}
+                    ref={el => { itemRefs.current[index] = el; }}
                     className={`${itemClassName} ${visibleItems.includes(index)
                         ? 'animate-fade-in-up'
                         : 'opacity-0 translate-y-12'
