@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Logo from "../Logo/Logo";
 import Menu from "../Menu/Menu";
 import Image from "next/image";
@@ -11,7 +11,13 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const pathname = usePathname();
   const { getCartCount } = useCart();
+
+  const isActive = (path: string) => {
+    if (path === '/') return pathname === '/';
+    return pathname.startsWith(path);
+  };
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -92,31 +98,31 @@ export default function Navbar() {
               <div className="flex flex-col space-y-6 mt-20 items-center justify-center">
                 <button
                   onClick={() => navigateTo('/')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-100"
+                  className={`text-xl font-medium transition-colors hover:scale-105 transform animate-menu-item delay-100 ${isActive('/') ? 'text-black underline underline-offset-4' : 'text-gray-500 hover:text-gray-800'}`}
                 >
                   Accueil
                 </button>
                 <button
                   onClick={() => navigateTo('/about')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-200"
+                  className={`text-xl font-medium transition-colors hover:scale-105 transform animate-menu-item delay-200 ${isActive('/about') ? 'text-black underline underline-offset-4' : 'text-gray-500 hover:text-gray-800'}`}
                 >
                   À propos
                 </button>
                 <button
                   onClick={() => navigateTo('/products')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-300"
+                  className={`text-xl font-medium transition-colors hover:scale-105 transform animate-menu-item delay-300 ${isActive('/products') ? 'text-black underline underline-offset-4' : 'text-gray-500 hover:text-gray-800'}`}
                 >
                   Catalogue
                 </button>
                 <button
                   onClick={() => navigateTo('/nouveautes')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform animate-menu-item delay-400"
+                  className={`text-xl font-medium transition-colors hover:scale-105 transform animate-menu-item delay-400 ${isActive('/nouveautes') ? 'text-black underline underline-offset-4' : 'text-gray-500 hover:text-gray-800'}`}
                 >
                   Nouveautés
                 </button>
                 <button
                   onClick={() => navigateTo('/cart')}
-                  className="text-xl font-medium hover:text-gray-600 transition-colors hover:scale-105 transform flex items-center gap-2 animate-menu-item delay-500"
+                  className={`text-xl font-medium transition-colors hover:scale-105 transform flex items-center gap-2 animate-menu-item delay-500 ${isActive('/cart') ? 'text-black underline underline-offset-4' : 'text-gray-500 hover:text-gray-800'}`}
                 >
                   Panier
                   {getCartCount() > 0 && (
