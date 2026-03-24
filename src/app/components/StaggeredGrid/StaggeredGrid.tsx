@@ -1,6 +1,7 @@
 'use client';
 
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface StaggeredGridProps {
     children: ReactNode[];
@@ -9,69 +10,44 @@ interface StaggeredGridProps {
     itemClassName?: string;
 }
 
+const container = {
+    hidden: {},
+    visible: (delayMs: number) => ({
+        transition: {
+            staggerChildren: delayMs / 1000,
+        },
+    }),
+};
+
+const item = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+};
+
 export default function StaggeredGrid({
     children,
     delay = 150,
     className = '',
-    itemClassName = ''
+    itemClassName = '',
 }: StaggeredGridProps) {
-    const [visibleItems, setVisibleItems] = useState<number[]>([]);
-    const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const observersRef = useRef<IntersectionObserver[]>([]);
-
-    useEffect(() => {
-        // Nettoyer les anciens observers
-        observersRef.current.forEach(observer => observer.disconnect());
-        observersRef.current = [];
-
-        // Créer un observer pour chaque élément
-        itemRefs.current.forEach((item, index) => {
-            if (!item) return;
-
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setVisibleItems(prev => {
-                            if (!prev.includes(index)) {
-                                return [...prev, index].sort((a, b) => a - b);
-                            }
-                            return prev;
-                        });
-                        observer.unobserve(item);
-                    }
-                },
-                {
-                    threshold: 0.1,
-                    rootMargin: '50px'
-                }
-            );
-
-            observer.observe(item);
-            observersRef.current.push(observer);
-        });
-
-        return () => {
-            observersRef.current.forEach(observer => observer.disconnect());
-        };
-    }, [children.length]);
-
     return (
-        <div className={className}>
+        <motion.div
+            className={className}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+            custom={delay}
+            variants={container}
+        >
             {children.map((child, index) => (
-                <div
-                    key={index}
-                    ref={el => { itemRefs.current[index] = el; }}
-                    className={`${itemClassName} ${visibleItems.includes(index)
-                        ? 'animate-fade-in-up'
-                        : 'opacity-0 translate-y-12'
-                        }`}
-                    style={{
-                        animationDelay: visibleItems.includes(index) ? `${visibleItems.indexOf(index) * delay}ms` : '0ms'
-                    }}
-                >
+                <motion.div key={index} className={itemClassName} variants={item}>
                     {child}
-                </div>
+                </motion.div>
             ))}
-        </div>
+        </motion.div>
     );
 }

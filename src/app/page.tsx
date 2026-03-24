@@ -10,18 +10,14 @@ import AnimatedSection from "./components/AnimatedSection/AnimatedSection";
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <AnimatedSection animation="fade-up">
-        <Hero />
-      </AnimatedSection>
+      <Hero />
       <AnimatedSection animation="fade-bottom-left" delay={300}>
         <Categories />
       </AnimatedSection>
       <AnimatedSection animation="fade-bottom-right" delay={400}>
         <ProductGrid />
       </AnimatedSection>
-      <AnimatedSection animation="fade-scale" delay={300}>
-        <ExclusiveOffers />
-      </AnimatedSection>
+      <ExclusiveOffers />
       <AnimatedSection animation="fade-left" delay={300}>
         <CustomerReviews />
       </AnimatedSection>

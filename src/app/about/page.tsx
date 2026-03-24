@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import AnimatedSection from "../components/AnimatedSection/AnimatedSection";
 
 // Composant pour le slider de dragées
@@ -71,24 +72,34 @@ export default function AboutPage() {
         <div className="min-h-screen bg-gray-50 page-transition">
 
             {/* Hero Section avec image de fond */}
-            <AnimatedSection animation="fade-up">
-                <section className="relative h-[300px] md:h-[400px] bg-gradient-to-r from-black to-gray-800 overflow-hidden">
-                    <div className="absolute inset-0 bg-black/40 z-10"></div>
-                    <div className="absolute inset-0 z-0">
-                        <img
-                            src="/dragee2.jpeg"
-                            alt="Maria Event"
-                            className="w-full h-full object-cover opacity-50"
-                        />
-                    </div>
-                    <div className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Maria Event</h1>
-                        <p className="text-lg md:text-xl text-center max-w-2xl">
-                            Votre partenaire de confiance pour vos événements et votre style
-                        </p>
-                    </div>
-                </section>
-            </AnimatedSection>
+            <section className="relative h-[300px] md:h-[400px] bg-gradient-to-r from-black to-gray-800 overflow-hidden">
+                <div className="absolute inset-0 bg-black/40 z-10"></div>
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/dragee2.jpeg"
+                        alt="Maria Event"
+                        className="w-full h-full object-cover opacity-50"
+                    />
+                </div>
+                <div className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4">
+                    <motion.h1
+                        className="text-4xl md:text-5xl font-bold mb-4 text-center"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+                    >
+                        Maria Event
+                    </motion.h1>
+                    <motion.p
+                        className="text-lg md:text-xl text-center max-w-2xl"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                    >
+                        Votre partenaire de confiance pour vos événements et votre style
+                    </motion.p>
+                </div>
+            </section>
 
             <section className="py-12 px-4">
                 <div className="max-w-6xl mx-auto">
