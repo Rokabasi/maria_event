@@ -60,6 +60,8 @@ export default function Categories() {
                             <SkeletonLoader key={index} />
                         ))}
                     </div>
+                ) : nouveautes.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">Aucune nouveauté disponible pour le moment. Découvrez nos derniers arrivages bientôt.</p>
                 ) : (
                     <StaggeredGrid
                         className="grid grid-cols-2 md:grid-cols-2 gap-2"

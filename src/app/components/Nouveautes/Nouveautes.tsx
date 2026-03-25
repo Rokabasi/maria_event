@@ -53,6 +53,17 @@ export default function Nouveautes() {
 
     const displayedProducts = products.slice(0, 4);
 
+    if (displayedProducts.length === 0) {
+        return (
+            <section className="py-12 px-4">
+                <div className="max-w-6xl mx-auto">
+                    <h2 className="text-base font-bold mb-8">Nouveautés</h2>
+                    <p className="text-center text-gray-500 py-8">Aucune nouveauté disponible pour le moment. Découvrez nos derniers arrivages bientôt.</p>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="py-12 px-4">
             <div className="max-w-6xl mx-auto">

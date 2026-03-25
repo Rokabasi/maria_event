@@ -7,8 +7,8 @@ export default function CustomerReviews() {
 
     const reviews = [
         {
-            name: "Sarah Martinez",
-            avatar: "S",
+            name: "Grâce Mbala",
+            avatar: "G",
             rating: 5,
             date: "Il y a 2 jours",
             comment: "Les baskets Nike Air Max sont incroyables ! Très confortables et le style est parfait. Livraison rapide et service client au top.",
@@ -16,8 +16,8 @@ export default function CustomerReviews() {
             color: "bg-pink-500"
         },
         {
-            name: "Jean Dupont",
-            avatar: "J",
+            name: "Patrick Kabongo",
+            avatar: "P",
             rating: 5,
             date: "Il y a 5 jours",
             comment: "Les dragées étaient parfaites pour mon mariage. Qualité exceptionnelle et goût délicieux. Tous mes invités ont adoré !",
@@ -25,7 +25,7 @@ export default function CustomerReviews() {
             color: "bg-blue-500"
         },
         {
-            name: "Emma Laurent",
+            name: "Esther Mwamba",
             avatar: "E",
             rating: 5,
             date: "Il y a 1 semaine",
@@ -34,8 +34,8 @@ export default function CustomerReviews() {
             color: "bg-green-500"
         },
         {
-            name: "Michel Robert",
-            avatar: "M",
+            name: "Serge Tshimanga",
+            avatar: "S",
             rating: 5,
             date: "Il y a 2 semaines",
             comment: "Commande de dragées pour un baptême. Emballage soigné, produit de qualité. Je recommande vivement Maria Event !",
@@ -43,8 +43,8 @@ export default function CustomerReviews() {
             color: "bg-purple-500"
         },
         {
-            name: "Lisa Kim",
-            avatar: "L",
+            name: "Nadine Lukusa",
+            avatar: "N",
             rating: 5,
             date: "Il y a 3 semaines",
             comment: "Les Jordan Retro sont magnifiques ! Authentiques et bien emballées. Service client réactif. Très satisfaite de mon achat.",

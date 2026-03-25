@@ -26,7 +26,9 @@ export default function ProductGrid() {
                     <h2 className="text-base font-bold">Produits populaires</h2>
                 </div>
 
-                {loading ? (
+                {!loading && displayedProducts.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">Aucun produit populaire disponible pour le moment.</p>
+                ) : loading ? (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                         {[...Array(4)].map((_, index) => (
                             <SkeletonLoader key={index} />

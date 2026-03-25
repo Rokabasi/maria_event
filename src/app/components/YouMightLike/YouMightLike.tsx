@@ -21,7 +21,9 @@ export default function YouMightLike() {
             <div className="max-w-6xl mx-auto">
                 <h2 className="text-base font-bold mb-8 text-center">Vous pourriez aussi aimer</h2>
 
-                {loading ? (
+                {!loading && displayedProducts.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">Aucune suggestion disponible pour le moment.</p>
+                ) : loading ? (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                         {[...Array(4)].map((_, index) => (
                             <SkeletonLoader key={index} />
