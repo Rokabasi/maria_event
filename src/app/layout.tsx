@@ -102,6 +102,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="q2Zjo4VuIwcebWKpFbyjKwC-sUAMjqaMIvWwJhL3w-s" />
       </head>
       <body
         className={`${montserrat.variable} antialiased overflow-x-hidden`}
