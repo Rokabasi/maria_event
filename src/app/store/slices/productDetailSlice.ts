@@ -9,7 +9,7 @@ interface ProductDetailState {
 
 const initialState: ProductDetailState = {
     product: null,
-    loading: false,
+    loading: true,
     error: null,
 };
 
@@ -27,6 +27,7 @@ const productDetailSlice = createSlice({
     reducers: {
         clearProduct: (state) => {
             state.product = null;
+            state.loading = true;
             state.error = null;
         },
     },
