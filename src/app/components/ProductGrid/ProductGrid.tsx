@@ -49,6 +49,8 @@ export default function ProductGrid() {
                                 isNew={false}
                                 brand={product.brand}
                                 category={product.category}
+                                brand={product.brand}
+                                size={product.size}
                             />
                         ))}
                     </StaggeredGrid>

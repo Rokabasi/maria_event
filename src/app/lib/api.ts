@@ -7,6 +7,7 @@ interface ApiProduct {
     pro_prix: string;
     pro_description: string;
     show_price: boolean;
+    pro_taille: string;
     typeProduit: {
         typ_nom: string;
     };
@@ -29,6 +30,7 @@ export interface Product {
     description: string;
     images: string[];
     sizes: string[];
+    size: string;
     showPrice: boolean;
     category: string;
 }
@@ -44,6 +46,7 @@ const transformProduct = (apiProduct: ApiProduct): Product => ({
     description: apiProduct.pro_description,
     images: apiProduct.documents?.map((doc) => `${process.env.NEXT_PUBLIC_API_URL}/images/${doc.doc_name}`) || [],
     sizes: [],
+    size: apiProduct.pro_taille || '',
     showPrice: apiProduct.show_price,
     category: apiProduct.public?.pu_nom || '',
 });

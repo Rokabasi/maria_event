@@ -75,6 +75,7 @@ export default function NouveautesPage() {
                                     isNew={true}
                                     brand={product.brand}
                                     category={product.category}
+                                    size={product.size}
                                 />
                             ))}
                         </StaggeredGrid>

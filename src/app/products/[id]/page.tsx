@@ -27,11 +27,12 @@ export default function ProductDetailPage() {
 
     const isDragee = product?.brand?.toLowerCase().includes('dragée') ||
         product?.brand?.toLowerCase().includes('dragee') ||
+        product?.brand?.toLowerCase().includes('dragues') ||
         product?.title?.toLowerCase().includes('dragée') ||
         product?.title?.toLowerCase().includes('dragee');
 
     const shoeSizes = ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
-    const drageePresets = ['250g', '500g', '1kg', '2kg', '5kg'];
+    const drageePresets = ['1kg'];
 
     useEffect(() => {
         dispatch(fetchProductById(productId));
@@ -68,8 +69,8 @@ export default function ProductDetailPage() {
             title: product.title,
             price: `${product.price}`,
             image: product.images[0],
-            size: isShoe ? selectedSize : (isDragee ? selectedPreset : 'Standard'),
-            quantity: quantity
+            size: isShoe ? product.size : (isDragee ? `${quantity}kg` : 'Standard'),
+            quantity: isDragee ? 1 : quantity
         });
     };
 
@@ -80,8 +81,8 @@ export default function ProductDetailPage() {
             title: product.title,
             price: `${product.price}`,
             image: product.images[0],
-            size: isShoe ? selectedSize : (isDragee ? selectedPreset : 'Standard'),
-            quantity: quantity
+            size: isShoe ? product.size : (isDragee ? `${quantity}kg` : 'Standard'),
+            quantity: isDragee ? 1 : quantity
         });
         router.push('/cart');
     };
@@ -115,21 +116,22 @@ export default function ProductDetailPage() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 py-6 lg:py-12">
-                <div className="bg-white rounded-2xl overflow-hidden lg:flex lg:gap-8 lg:p-8">
+            <div className="max-w-7xl mx-auto lg:px-4 py-0 lg:py-12">
+                <div className="bg-white lg:rounded-2xl overflow-hidden lg:flex lg:gap-8 lg:p-8">
                     {/* Image slider du produit - Gauche sur desktop */}
-                    <div className="lg:flex-1 lg:max-w-2xl px-4 py-6 lg:px-0">
-                        <div className="relative aspect-square bg-gray-100 rounded-2xl mb-3 overflow-hidden">
+                    <div className="lg:flex-1 lg:max-w-2xl lg:px-0">
+                        <div className="relative w-full bg-white lg:rounded-2xl mb-3 overflow-hidden" style={{ paddingBottom: '100%' }}>
                             <div
-                                className="flex transition-transform duration-300 ease-in-out h-full"
+                                className="absolute inset-0 flex transition-transform duration-300 ease-in-out"
                                 style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
                             >
                                 {product.images.map((image, index) => (
-                                    <div key={index} className="min-w-full h-full shrink-0">
+                                    <div key={index} className="absolute inset-0 flex items-center justify-center bg-white"
+                                        style={{ left: `${index * 100}%`, width: '100%' }}>
                                         <img
                                             src={image}
                                             alt={`${product.title} - Image ${index + 1}`}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-contain"
                                         />
                                     </div>
                                 ))}
@@ -137,7 +139,7 @@ export default function ProductDetailPage() {
                         </div>
                         {/* Indicateurs de pagination */}
                         {product.images.length > 1 && (
-                            <div className="flex justify-center gap-2">
+                            <div className="flex justify-center gap-2 py-3">
                                 {product.images.map((_, index) => (
                                     <button
                                         key={index}
@@ -180,26 +182,12 @@ export default function ProductDetailPage() {
                         {/* Description */}
                         <p className="text-gray-500 text-xs lg:text-base leading-relaxed mb-5 lg:mb-8 whitespace-pre-line">{product.description}</p>
 
-                        {/* Pointures pour baskets */}
-                        {isShoe && (
+                        {/* Taille pour baskets */}
+                        {isShoe && product.size && (
                             <div className="mb-5 lg:mb-8">
-                                <label className="block font-bold text-base lg:text-lg mb-3">
-                                    Pointure: <span className="font-normal">{selectedSize}</span>
-                                </label>
-                                <div className="grid grid-cols-6 gap-2">
-                                    {shoeSizes.map((size) => (
-                                        <button
-                                            key={size}
-                                            onClick={() => setSelectedSize(size)}
-                                            className={`h-10 lg:h-12 rounded-lg font-semibold text-xs lg:text-sm transition-all ${selectedSize === size
-                                                ? 'bg-black text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                                }`}
-                                        >
-                                            {size}
-                                        </button>
-                                    ))}
-                                </div>
+                                <span className="block font-bold text-base lg:text-lg mb-3">
+                                    Pointure: <span className="font-normal">{product.size}</span>
+                                </span>
                             </div>
                         )}
 
@@ -207,21 +195,27 @@ export default function ProductDetailPage() {
                         {isDragee && (
                             <div className="mb-5 lg:mb-8">
                                 <label className="block font-bold text-base lg:text-lg mb-3">
-                                    Quantité: <span className="font-normal">{selectedPreset}</span>
+                                    Quantité (kg)
                                 </label>
-                                <div className="grid grid-cols-3 gap-2">
-                                    {drageePresets.map((preset) => (
-                                        <button
-                                            key={preset}
-                                            onClick={() => setSelectedPreset(preset)}
-                                            className={`h-10 lg:h-12 rounded-lg font-semibold text-xs lg:text-sm transition-all ${selectedPreset === preset
-                                                ? 'bg-black text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                                }`}
-                                        >
-                                            {preset}
-                                        </button>
-                                    ))}
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                        className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                        </svg>
+                                    </button>
+                                    <span className="text-lg lg:text-xl font-semibold w-16 text-center">{quantity} kg</span>
+                                    <button
+                                        onClick={() => setQuantity(quantity + 1)}
+                                        className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <line x1="12" y1="5" x2="12" y2="19" />
+                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         )}

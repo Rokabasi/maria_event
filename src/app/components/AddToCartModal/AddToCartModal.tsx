@@ -14,14 +14,13 @@ interface AddToCartModalProps {
         image: string;
         brand: string;
         category?: string;
+        size?: string;
     };
 }
 
 export default function AddToCartModal({ isOpen, onClose, product }: AddToCartModalProps) {
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
-    const [selectedSize, setSelectedSize] = useState('');
-    const [selectedPreset, setSelectedPreset] = useState('');
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -36,17 +35,13 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
 
     const isDragee = product.brand?.toLowerCase().includes('dragée') ||
         product.brand?.toLowerCase().includes('dragee') ||
+        product.brand?.toLowerCase().includes('dragues') ||
         product.title?.toLowerCase().includes('dragée') ||
         product.title?.toLowerCase().includes('dragee');
-
-    const shoeSizes = ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
-    const drageePresets = ['250g', '500g', '1kg', '2kg', '5kg'];
 
     useEffect(() => {
         if (isOpen) {
             setQuantity(1);
-            setSelectedSize(isShoe ? shoeSizes[0] : '');
-            setSelectedPreset(isDragee ? drageePresets[0] : '');
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
@@ -54,7 +49,7 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
         return () => {
             document.body.style.overflow = 'unset';
         };
-    }, [isOpen, isShoe, isDragee]);
+    }, [isOpen]);
 
     const handleAddToCart = () => {
         addToCart({
@@ -62,8 +57,8 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
             title: product.title,
             price: product.price,
             image: product.image,
-            size: isShoe ? selectedSize : (isDragee ? selectedPreset : 'Standard'),
-            quantity: quantity
+            size: isShoe ? (product.size || 'Standard') : (isDragee ? `${quantity}kg` : 'Standard'),
+            quantity: isDragee ? 1 : quantity
         });
         onClose();
     };
@@ -107,46 +102,38 @@ export default function AddToCartModal({ isOpen, onClose, product }: AddToCartMo
                                 </div>
                             </div>
 
-                            {isShoe && (
+                            {isShoe && product.size && (
                                 <div className="mb-5 sm:mb-6">
-                                    <label className="block font-bold text-sm sm:text-base mb-2 sm:mb-3">
-                                        Pointure: <span className="font-normal">{selectedSize}</span>
-                                    </label>
-                                    <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
-                                        {shoeSizes.map((size) => (
-                                            <button
-                                                key={size}
-                                                onClick={() => setSelectedSize(size)}
-                                                className={`h-10 sm:h-12 rounded-lg font-semibold text-xs sm:text-sm transition-all ${selectedSize === size
-                                                    ? 'bg-black text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                                    }`}
-                                            >
-                                                {size}
-                                            </button>
-                                        ))}
-                                    </div>
+                                    <p className="font-bold text-sm sm:text-base">
+                                        Pointure: <span className="font-normal">{product.size}</span>
+                                    </p>
                                 </div>
                             )}
 
                             {isDragee && (
                                 <div className="mb-5 sm:mb-6">
                                     <label className="block font-bold text-sm sm:text-base mb-2 sm:mb-3">
-                                        Quantité: <span className="font-normal">{selectedPreset}</span>
+                                        Quantité (kg)
                                     </label>
-                                    <div className="grid grid-cols-3 gap-2">
-                                        {drageePresets.map((preset) => (
-                                            <button
-                                                key={preset}
-                                                onClick={() => setSelectedPreset(preset)}
-                                                className={`h-10 sm:h-12 rounded-lg font-semibold text-xs sm:text-sm transition-all ${selectedPreset === preset
-                                                    ? 'bg-black text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                                    }`}
-                                            >
-                                                {preset}
-                                            </button>
-                                        ))}
+                                    <div className="flex items-center gap-3 sm:gap-4">
+                                        <button
+                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors shrink-0"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <line x1="5" y1="12" x2="19" y2="12" />
+                                            </svg>
+                                        </button>
+                                        <span className="text-lg sm:text-xl font-semibold w-16 text-center">{quantity} kg</span>
+                                        <button
+                                            onClick={() => setQuantity(quantity + 1)}
+                                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors shrink-0"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <line x1="12" y1="5" x2="12" y2="19" />
+                                                <line x1="5" y1="12" x2="19" y2="12" />
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             )}

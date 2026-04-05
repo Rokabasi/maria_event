@@ -77,6 +77,8 @@ export default function Categories() {
                                 isNew={true}
                                 brand={product.brand}
                                 category={product.category}
+                                brand={product.brand}
+                                size={product.size}
                             />
                         ))}
                     </StaggeredGrid>

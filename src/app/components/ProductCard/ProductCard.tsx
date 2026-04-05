@@ -12,9 +12,10 @@ interface ProductCardProps {
     isNew?: boolean;
     brand?: string;
     category?: string;
+    size?: string;
 }
 
-export default function ProductCard({ id, title, price, image, isNew, brand, category }: ProductCardProps) {
+export default function ProductCard({ id, title, price, image, isNew, brand, category, size }: ProductCardProps) {
     const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -89,6 +90,7 @@ export default function ProductCard({ id, title, price, image, isNew, brand, cat
                     image,
                     brand: brand || '',
                     category: category || '',
+                    size: size || '',
                 }}
             />
         </>
