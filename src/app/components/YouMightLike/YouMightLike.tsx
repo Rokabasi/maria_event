@@ -40,8 +40,7 @@ export default function YouMightLike() {
                                 image={product.images[0] || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop'}
                                 brand={product.brand}
                                 category={product.category}
-                                brand={product.brand}
-                                size={product.size}
+                                                                size={product.size}
                             />
                         ))}
                     </div>
