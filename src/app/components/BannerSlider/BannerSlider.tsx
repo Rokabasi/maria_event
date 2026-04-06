@@ -2,25 +2,44 @@
 
 import { useState, useEffect } from 'react';
 
-const bannerImages = [
+const bannerDesktop = [
     '/banner.jpg',
-    '/banner1.jpg',
+    '/banner1.JPG',
     '/banner2.jpg',
-    '/banner3.jpg',
+    '/banner3.JPG',
     '/banner4.jpg',
-    '/banner5.jpg'
+    '/banner5.JPG'
+];
+
+const bannerMobile = [
+    '/banner.jpg',
+    '/banner1-mobile.png',
+    '/banner2.jpg',
+    '/banner3-mobile.png',
+    '/banner4.jpg',
+    '/banner5.JPG'
 ];
 
 export default function BannerSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+
+    const bannerImages = isMobile ? bannerMobile : bannerDesktop;
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % bannerImages.length);
-        }, 5000); // Change slide every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [bannerImages.length]);
 
     const goToSlide = (index: number) => {
         setCurrentSlide(index);
