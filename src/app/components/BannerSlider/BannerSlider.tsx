@@ -17,7 +17,7 @@ const bannerMobile = [
     '/banner2.jpg',
     '/banner3-mobile.png',
     '/banner4.jpg',
-    '/banner5.JPG'
+    '/banner5-mobile.png'
 ];
 
 export default function BannerSlider() {
